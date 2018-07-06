@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import { main } from 'perspectives-core';
-import perspectivesProxy from 'perspectives-proxy';
 import { Context, Binding, View, ContextVanRol, ExterneView } from "perspectives-react";
 
-// Start the core. 2
+// Start the core. 4
 main();
 
 class App extends Component

@@ -19,3 +19,11 @@ run targets:
 
 Webpack targets the electron-renderer process. The code that it runs contains a reference to `perspectives-proxy`, which uses the Node `net` module.
 This cannot run in an ordinary browser. However, the Chromium in Electron allows access to `net`.
+
+### Dependencies
+This client depends on:
+* `perspectives-core`
+* `perspectives-react`
+* `perspectives-proxy`
+
+The latter module is not required by the App itself, but as an external dependency by both `perspectives-core` and `perspectives-react`. Hence it is listed as a dependency in `package.json`.
