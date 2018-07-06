@@ -2,11 +2,11 @@ perspectives-react-integrated-client
 ======================
 
 ### A standard development interface
-This client includes the perspectives-core. It uses the internal channel to communicate with the core.
+This client includes the perspectives-core. It uses the internal channel to communicate with the core. However, the core will also listen on TCP port 7777.
 
 ### Develop this interface
 1. `$npm run serve` to start the development server (that serves the bundled code on port 5678).
-2. `npm run electron` to start the interface (the browser, that tries to read from port 5678).
+2. `npm run electron` to start the interface (the browser, that tries to read from port 5678). **Note**: this will also start perspectives-core listening on port 7777!
 3. `npm run watch` before changing code, otherwise changes will not be reflected in the interface!
 
 ### About deployment
