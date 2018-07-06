@@ -9,6 +9,14 @@ This client includes the perspectives-core. It uses the internal channel to comm
 2. `npm run electron` to start the interface (the browser, that tries to read from port 5678). **Note**: this will also start perspectives-core listening on port 7777!
 3. `npm run watch` before changing code, otherwise changes will not be reflected in the interface!
 
+### Symlinks for easy updates
+`package.json` contains a run target `symlinks` that will replace the subdirectories
+* perspectives-react
+* perspectives-core
+* perspectives-proxy
+
+with symlinks to the same-named projects in ~Code. Run this script after calling `npm install`. A change in the `dist` directories of these projects is then immediately picked up by webpack (when watching, of course).
+
 ### About deployment
 This module depends on Webpack, the Webpack-development-server and Electron. There are three
 run targets:

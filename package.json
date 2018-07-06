@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "electron": "WEBPACK_DEVSERVER_PORT=5678 electron .",
-    "serve": "WEBPACK_DEVSERVER_PORT=5678 webpack-dev-server"
+    "serve": "WEBPACK_DEVSERVER_PORT=5678 webpack-dev-server",
+    "symlinks": "./createPerspectivesLinks.sh"
   },
   "author": "Joop Ringelberg",
   "license": "ISC",
