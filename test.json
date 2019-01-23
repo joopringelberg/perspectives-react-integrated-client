@@ -1,0 +1,1219 @@
+{
+  "_id": "model:TestBotActie",
+  "_rev": "21-1be069ea07d37580e96cbf81c73d0a80",
+  "roles": {
+    "model:TestBotActie$_buitenRol": {
+      "pspType": "model:Perspectives$ContextPrototype$buitenRolBeschrijving",
+      "properties": {},
+      "occurrence": 0,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$_buitenRol"
+    },
+    "model:TestBotActie$rolInContext1": {
+      "pspType": "model:Perspectives$Context$rolInContext",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test_buitenRol",
+      "_id": "model:TestBotActie$rolInContext1"
+    },
+    "model:TestBotActie$Test_buitenRol": {
+      "pspType": "model:Perspectives$ContextPrototype$buitenRolBeschrijving",
+      "properties": {},
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Context$rolInContext": [
+          "model:TestBotActie$rolInContext1"
+        ]
+      },
+      "context": "model:TestBotActie$Test",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$Test_buitenRol"
+    },
+    "model:TestBotActie$Test$Context$contextBot_1": {
+      "pspType": "model:Perspectives$Context$contextBot",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$bot_buitenRol",
+      "_id": "model:TestBotActie$Test$Context$contextBot_1"
+    },
+    "model:TestBotActie$Test$actieInContext_1": {
+      "pspType": "model:Perspectives$Zaak$actieInContext",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$botCopiesV1ToV2_buitenRol",
+      "_id": "model:TestBotActie$Test$actieInContext_1"
+    },
+    "model:TestBotActie$Test$Context$binnenRolBeschrijving_1": {
+      "pspType": "model:Perspectives$Context$binnenRolBeschrijving",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving_buitenRol",
+      "_id": "model:TestBotActie$Test$Context$binnenRolBeschrijving_1"
+    },
+    "model:TestBotActie$Test$bot_buitenRol": {
+      "pspType": "model:Perspectives$Rol$buitenRolBeschrijving",
+      "properties": {},
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Context$contextBot": [
+          "model:TestBotActie$Test$Context$contextBot_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$bot",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$Test$bot_buitenRol"
+    },
+    "model:TestBotActie$Test$bot$subjectRol_1": {
+      "pspType": "model:Perspectives$Rol$subjectRol",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$bot",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$botCopiesV1ToV2_buitenRol",
+      "_id": "model:TestBotActie$Test$bot$subjectRol_1"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2_buitenRol": {
+      "pspType": "model:Perspectives$ContextPrototype$buitenRolBeschrijving",
+      "properties": {},
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Zaak$actieInContext": [
+          "model:TestBotActie$Test$actieInContext_1"
+        ],
+        "model:Perspectives$Rol$subjectRol": [
+          "model:TestBotActie$Test$bot$subjectRol_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2_buitenRol"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$effect_1": {
+      "pspType": "model:Perspectives$Actie$effect",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$effect_1"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$condition_1": {
+      "pspType": "model:Perspectives$Actie$condition",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$condition_1"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2_buitenRol": {
+      "pspType": "model:Perspectives$assignToProperty$buitenRolBeschrijving",
+      "properties": {
+        "model:Perspectives$assignToProperty$buitenRolBeschrijving$operation": {
+          "value": [
+            "set"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Actie$effect": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$effect_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2_buitenRol"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$value_1": {
+      "pspType": "model:Perspectives$assignToProperty$value",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$value_1"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$property_1": {
+      "pspType": "model:Perspectives$assignToProperty$property",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$v2_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$property_1"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1_buitenRol": {
+      "pspType": "model:QueryAst$PropertyGetter$buitenRolBeschrijving",
+      "properties": {
+        "model:QueryAst$PropertyGetter$buitenRolBeschrijving$functionName": {
+          "value": [
+            "constructInternalPropertyGetter"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$assignToProperty$value": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$value_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1_buitenRol"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1$property_1": {
+      "pspType": "model:QueryAst$PropertyGetter$property",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$v1_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1$property_1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$v1_buitenRol": {
+      "pspType": "model:Perspectives$Property$buitenRolBeschrijving",
+      "properties": {
+        "model:Perspectives$Property$buitenRolBeschrijving$isFunctioneel": {
+          "value": [
+            "true"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "model:Perspectives$Property$buitenRolBeschrijving$isVerplicht": {
+          "value": [
+            "false"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Rol$rolProperty": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_1"
+        ],
+        "model:QueryAst$PropertyGetter$property": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1$property_1",
+          "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1$property_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$v1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$v1_buitenRol"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$v1$range_1": {
+      "pspType": "model:Perspectives$Property$range",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$v1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$String_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$v1$range_1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$v2_buitenRol": {
+      "pspType": "model:Perspectives$Property$buitenRolBeschrijving",
+      "properties": {
+        "model:Perspectives$Property$buitenRolBeschrijving$isFunctioneel": {
+          "value": [
+            "true"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "model:Perspectives$Property$buitenRolBeschrijving$isVerplicht": {
+          "value": [
+            "false"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Rol$rolProperty": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_2"
+        ],
+        "model:QueryAst$PropertyGetter$property": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2$property_1"
+        ],
+        "model:Perspectives$assignToProperty$property": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$property_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$v2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$v2_buitenRol"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$v2$range_1": {
+      "pspType": "model:Perspectives$Property$range",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$v2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$String_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$v2$range_1"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger_buitenRol": {
+      "pspType": "model:QueryAst$nAryCombinator$buitenRolBeschrijving",
+      "properties": {
+        "model:QueryAst$nAryCombinator$buitenRolBeschrijving$functionName": {
+          "value": [
+            "conj"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Actie$condition": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$condition_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger_buitenRol"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$operand_1": {
+      "pspType": "model:QueryAst$nAryCombinator$operand",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$operand_1"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$operand_2": {
+      "pspType": "model:QueryAst$nAryCombinator$operand",
+      "properties": {},
+      "occurrence": 2,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$operand_2"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1_buitenRol": {
+      "pspType": "model:QueryAst$PropertyGetter$buitenRolBeschrijving",
+      "properties": {
+        "model:QueryAst$PropertyGetter$buitenRolBeschrijving$functionName": {
+          "value": [
+            "propertyQuery"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:QueryAst$nAryCombinator$operand": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$operand_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1_buitenRol"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1$property_1": {
+      "pspType": "model:QueryAst$PropertyGetter$property",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1$property_1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual_buitenRol": {
+      "pspType": "model:QueryAst$nAryCombinator$buitenRolBeschrijving",
+      "properties": {
+        "model:QueryAst$nAryCombinator$buitenRolBeschrijving$functionName": {
+          "value": [
+            "equal"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Rol$rolProperty": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_4"
+        ],
+        "model:QueryAst$PropertyGetter$property": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1$property_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual_buitenRol"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$operand_1": {
+      "pspType": "model:QueryAst$nAryCombinator$operand",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$operand_1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$operand_2": {
+      "pspType": "model:QueryAst$nAryCombinator$operand",
+      "properties": {},
+      "occurrence": 2,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$operand_2"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1_buitenRol": {
+      "pspType": "model:QueryAst$PropertyGetter$buitenRolBeschrijving",
+      "properties": {
+        "model:QueryAst$PropertyGetter$buitenRolBeschrijving$functionName": {
+          "value": [
+            "constructInternalPropertyGetter"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:QueryAst$nAryCombinator$operand": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$operand_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1_buitenRol"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1$property_1": {
+      "pspType": "model:QueryAst$PropertyGetter$property",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$v1_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1$property_1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2_buitenRol": {
+      "pspType": "model:QueryAst$PropertyGetter$buitenRolBeschrijving",
+      "properties": {
+        "model:QueryAst$PropertyGetter$buitenRolBeschrijving$functionName": {
+          "value": [
+            "constructInternalPropertyGetter"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:QueryAst$nAryCombinator$operand": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$operand_2"
+        ]
+      },
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2_buitenRol"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2$property_1": {
+      "pspType": "model:QueryAst$PropertyGetter$property",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$v2_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2$property_1"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger_buitenRol": {
+      "pspType": "model:QueryAst$PropertyGetter$buitenRolBeschrijving",
+      "properties": {
+        "model:QueryAst$PropertyGetter$buitenRolBeschrijving$functionName": {
+          "value": [
+            "constructInternalPropertyGetter"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:QueryAst$nAryCombinator$operand": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$operand_2"
+        ]
+      },
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$ContextPrototype_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger_buitenRol"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger$property_1": {
+      "pspType": "model:QueryAst$PropertyGetter$property",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$trigger_buitenRol",
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger$property_1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$trigger_buitenRol": {
+      "pspType": "model:Perspectives$Property$buitenRolBeschrijving",
+      "properties": {
+        "model:Perspectives$Property$buitenRolBeschrijving$isFunctioneel": {
+          "value": [
+            "true"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "model:Perspectives$Property$buitenRolBeschrijving$isVerplicht": {
+          "value": [
+            "false"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Rol$rolProperty": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_3"
+        ],
+        "model:QueryAst$PropertyGetter$property": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger$property_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$trigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$trigger_buitenRol"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$trigger$range_1": {
+      "pspType": "model:Perspectives$Property$range",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving$trigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$Boolean_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$trigger$range_1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving_buitenRol": {
+      "pspType": "model:Perspectives$Rol$buitenRolBeschrijving",
+      "properties": {
+        "model:Perspectives$Rol$buitenRolBeschrijving$isFunctioneel": {
+          "value": [
+            "true"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "model:Perspectives$Rol$buitenRolBeschrijving$isVerplicht": {
+          "value": [
+            "true"
+          ],
+          "commentBefore": [],
+          "commentAfter": []
+        }
+      },
+      "occurrence": 0,
+      "gevuldeRollen": {
+        "model:Perspectives$Context$binnenRolBeschrijving": [
+          "model:TestBotActie$Test$Context$binnenRolBeschrijving_1"
+        ]
+      },
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving_buitenRol"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_1": {
+      "pspType": "model:Perspectives$Rol$rolProperty",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$v1_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_2": {
+      "pspType": "model:Perspectives$Rol$rolProperty",
+      "properties": {},
+      "occurrence": 2,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$v2_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_2"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_3": {
+      "pspType": "model:Perspectives$Rol$rolProperty",
+      "properties": {},
+      "occurrence": 3,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$trigger_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_3"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_4": {
+      "pspType": "model:Perspectives$Rol$rolProperty",
+      "properties": {},
+      "occurrence": 4,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_4"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$mogelijkeBinding_1": {
+      "pspType": "model:Perspectives$Rol$mogelijkeBinding",
+      "properties": {},
+      "occurrence": 1,
+      "gevuldeRollen": {},
+      "context": "model:TestBotActie$Test$binnenRolBeschrijving",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "binding": "model:Perspectives$Rol_buitenRol",
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$mogelijkeBinding_1"
+    }
+  },
+  "contexts": {
+    "model:TestBotActie": {
+      "rolInContext": {
+        "model:Perspectives$Context$rolInContext": [
+          "model:TestBotActie$rolInContext1"
+        ]
+      },
+      "pspType": "model:Perspectives$Context",
+      "displayName": "model:TestBotActie",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$_buitenRol",
+      "binnenRol": {
+        "pspType": "model:Perspectives$Context$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$_buitenRol",
+        "_id": "model:TestBotActie$_binnenRol"
+      },
+      "_id": "model:TestBotActie"
+    },
+    "model:TestBotActie$Test": {
+      "rolInContext": {
+        "model:Perspectives$Context$contextBot": [
+          "model:TestBotActie$Test$Context$contextBot_1"
+        ],
+        "model:Perspectives$Zaak$actieInContext": [
+          "model:TestBotActie$Test$actieInContext_1"
+        ],
+        "model:Perspectives$Context$binnenRolBeschrijving": [
+          "model:TestBotActie$Test$Context$binnenRolBeschrijving_1"
+        ]
+      },
+      "pspType": "model:Perspectives$Zaak",
+      "displayName": "Test",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test_buitenRol",
+      "binnenRol": {
+        "pspType": "model:Perspectives$Zaak$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test_buitenRol",
+        "_id": "model:TestBotActie$Test_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test"
+    },
+    "model:TestBotActie$Test$bot": {
+      "rolInContext": {
+        "model:Perspectives$Rol$subjectRol": [
+          "model:TestBotActie$Test$bot$subjectRol_1"
+        ]
+      },
+      "pspType": "model:Perspectives$Rol",
+      "displayName": "bot",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$bot_buitenRol",
+      "binnenRol": {
+        "pspType": "model:Perspectives$Rol$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$bot_buitenRol",
+        "_id": "model:TestBotActie$Test$bot_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$bot"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2": {
+      "rolInContext": {
+        "model:Perspectives$Actie$effect": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$effect_1"
+        ],
+        "model:Perspectives$Actie$condition": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$condition_1"
+        ]
+      },
+      "pspType": "model:Perspectives$Actie",
+      "displayName": "botCopiesV1ToV2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$botCopiesV1ToV2_buitenRol",
+      "binnenRol": {
+        "pspType": "model:Perspectives$Actie$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$botCopiesV1ToV2_buitenRol",
+        "_id": "model:TestBotActie$Test$botCopiesV1ToV2_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2": {
+      "rolInContext": {
+        "model:Perspectives$assignToProperty$value": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$value_1"
+        ],
+        "model:Perspectives$assignToProperty$property": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$property_1"
+        ]
+      },
+      "pspType": "model:Perspectives$assignToProperty",
+      "displayName": "copyV1ToV2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2_buitenRol",
+      "binnenRol": {
+        "pspType": "model:Perspectives$assignToProperty$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2_buitenRol",
+        "_id": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1": {
+      "rolInContext": {
+        "model:QueryAst$PropertyGetter$property": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1$property_1"
+        ]
+      },
+      "pspType": "model:QueryAst$PropertyGetter",
+      "displayName": "n1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1_buitenRol",
+      "binnenRol": {
+        "pspType": "model:QueryAst$PropertyGetter$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1_buitenRol",
+        "_id": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$copyV1ToV2$n1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$v1": {
+      "rolInContext": {
+        "model:Perspectives$Property$range": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$v1$range_1"
+        ]
+      },
+      "pspType": "model:Perspectives$Property",
+      "displayName": "v1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$binnenRolBeschrijving$v1_buitenRol",
+      "binnenRol": {
+        "pspType": "model:Perspectives$Property$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$binnenRolBeschrijving$v1_buitenRol",
+        "_id": "model:TestBotActie$Test$binnenRolBeschrijving$v1_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$v1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$v2": {
+      "rolInContext": {
+        "model:Perspectives$Property$range": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$v2$range_1"
+        ]
+      },
+      "pspType": "model:Perspectives$Property",
+      "displayName": "v2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$binnenRolBeschrijving$v2_buitenRol",
+      "binnenRol": {
+        "pspType": "model:Perspectives$Property$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$binnenRolBeschrijving$v2_buitenRol",
+        "_id": "model:TestBotActie$Test$binnenRolBeschrijving$v2_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$v2"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger": {
+      "rolInContext": {
+        "model:QueryAst$nAryCombinator$operand": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$operand_1",
+          "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$operand_2"
+        ]
+      },
+      "pspType": "model:QueryAst$nAryCombinator",
+      "displayName": "propsEqualAndTrigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger_buitenRol",
+      "binnenRol": {
+        "pspType": "model:QueryAst$nAryCombinator$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger_buitenRol",
+        "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1": {
+      "rolInContext": {
+        "model:QueryAst$PropertyGetter$property": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1$property_1"
+        ]
+      },
+      "pspType": "model:QueryAst$PropertyGetter",
+      "displayName": "propsEqual1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1_buitenRol",
+      "binnenRol": {
+        "pspType": "model:QueryAst$PropertyGetter$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1_buitenRol",
+        "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$propsEqual1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual": {
+      "rolInContext": {
+        "model:QueryAst$nAryCombinator$operand": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$operand_1",
+          "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$operand_2"
+        ]
+      },
+      "pspType": "model:QueryAst$nAryCombinator",
+      "displayName": "propsEqual",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual_buitenRol",
+      "binnenRol": {
+        "pspType": "model:QueryAst$nAryCombinator$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual_buitenRol",
+        "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1": {
+      "rolInContext": {
+        "model:QueryAst$PropertyGetter$property": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1$property_1"
+        ]
+      },
+      "pspType": "model:QueryAst$PropertyGetter",
+      "displayName": "n1",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1_buitenRol",
+      "binnenRol": {
+        "pspType": "model:QueryAst$PropertyGetter$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1_buitenRol",
+        "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n1"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2": {
+      "rolInContext": {
+        "model:QueryAst$PropertyGetter$property": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2$property_1"
+        ]
+      },
+      "pspType": "model:QueryAst$PropertyGetter",
+      "displayName": "n2",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2_buitenRol",
+      "binnenRol": {
+        "pspType": "model:QueryAst$PropertyGetter$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2_buitenRol",
+        "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$propsEqual$n2"
+    },
+    "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger": {
+      "rolInContext": {
+        "model:QueryAst$PropertyGetter$property": [
+          "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger$property_1"
+        ]
+      },
+      "pspType": "model:QueryAst$PropertyGetter",
+      "displayName": "trigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger_buitenRol",
+      "binnenRol": {
+        "pspType": "model:QueryAst$PropertyGetter$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger_buitenRol",
+        "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$botCopiesV1ToV2$propsEqualAndTrigger$trigger"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving$trigger": {
+      "rolInContext": {
+        "model:Perspectives$Property$range": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$trigger$range_1"
+        ]
+      },
+      "pspType": "model:Perspectives$Property",
+      "displayName": "trigger",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$binnenRolBeschrijving$trigger_buitenRol",
+      "binnenRol": {
+        "pspType": "model:Perspectives$Property$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$binnenRolBeschrijving$trigger_buitenRol",
+        "_id": "model:TestBotActie$Test$binnenRolBeschrijving$trigger_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving$trigger"
+    },
+    "model:TestBotActie$Test$binnenRolBeschrijving": {
+      "rolInContext": {
+        "model:Perspectives$Rol$rolProperty": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_1",
+          "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_2",
+          "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_3",
+          "model:TestBotActie$Test$binnenRolBeschrijving$rolProperty_4"
+        ],
+        "model:Perspectives$Rol$mogelijkeBinding": [
+          "model:TestBotActie$Test$binnenRolBeschrijving$mogelijkeBinding_1"
+        ]
+      },
+      "pspType": "model:Perspectives$Rol",
+      "displayName": "binnenRolBeschrijving",
+      "comments": {
+        "commentBefore": [],
+        "commentAfter": []
+      },
+      "buitenRol": "model:TestBotActie$Test$binnenRolBeschrijving_buitenRol",
+      "binnenRol": {
+        "pspType": "model:Perspectives$Rol$binnenRolBeschrijving",
+        "properties": {},
+        "occurrence": 0,
+        "gevuldeRollen": {},
+        "context": "",
+        "comments": {
+          "commentBefore": [],
+          "commentAfter": []
+        },
+        "binding": "model:TestBotActie$Test$binnenRolBeschrijving_buitenRol",
+        "_id": "model:TestBotActie$Test$binnenRolBeschrijving_binnenRol"
+      },
+      "_id": "model:TestBotActie$Test$binnenRolBeschrijving"
+    }
+  }
+}
