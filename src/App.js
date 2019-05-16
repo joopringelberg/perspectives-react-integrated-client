@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { main } from 'perspectives-core';
-import { Context, Rollen, RolBinding, View, ContextOfRole, ExternalViewOfBoundContext, ViewOnExternalRole, SetProperty } from "perspectives-react";
+import { Context, Rollen, RolBinding, View, ContextOfRole, ExternalViewOfBoundContext, ViewOnExternalRole, SetProperty, InternalViewOfBoundContext, CreateContext } from "perspectives-react";
 
 // Start the core. 4
 main();
@@ -15,11 +15,12 @@ class App extends Component
         <header className="App-header">
           <h1 className="App-title">perspectives-react-integrated-client</h1>
         </header>
-        <Context type="model:Systeem$Systeem" contextinstance="model:User$MijnSysteem">
+        <Context type="model:Perspectives$PerspectivesSysteem" contextinstance="model:User$MijnSysteem">
           <Rollen rollen={[
             "gebruiker",
             "modellen",
-            "trustedCluster"
+            "trustedCluster",
+            "zaken"
           ]}>
             <View rolname="gebruiker" viewname="VolledigeNaam">
               <GebruikerNaam />
@@ -50,11 +51,13 @@ class App extends Component
               </ContextOfRole>
             </RolBinding>
             <ModelId rolname="modellen" />
-
-            {/*<View rolname="modellen" viewname="AlleModellen">*/}
-            {/*<Models/>*/}
-            {/*</View>*/}
+            <InternalViewOfBoundContext rolname="zaken" viewname="allProps">
+              <TestBotActie/>
+            </InternalViewOfBoundContext>
           </Rollen>
+          <CreateContext rolname="zaken" contextname="model:TestBotActie$Test">
+            <CreateButton/>
+          </CreateContext>
         </Context>
 
       </div>
@@ -93,6 +96,41 @@ function GebruikerVoornaamInput (props)
     <legend>Verander de gebruikers' voornaam in:</legend>
     <input defaultValue={props.defaultvalue} onBlur={e => props.setvalue(e.target.value)} />
     </fieldset>);
+}
+
+function TestBotActie (props)
+{
+  return (
+    <div>
+      <p><label>v2:</label>{props.v2}</p>
+      <SetProperty propertyname="trigger" namespace={props.namespace} rolinstance={props.rolinstance}>
+        <TriggerInput/>
+      </SetProperty>
+      <SetProperty propertyname="v1" namespace={props.namespace} rolinstance={props.rolinstance}>
+        <V1Input/>
+      </SetProperty>
+    </div>
+  );
+}
+function V1Input (props)
+{
+  return (<fieldset>
+    <legend>Verander v1:</legend>
+    <input defaultValue={props.defaultvalue} onBlur={e => props.setvalue(e.target.value)} />
+    </fieldset>);
+}
+
+function TriggerInput (props)
+{
+  return (<fieldset>
+    <legend>Verander trigger:</legend>
+    <input defaultValue={props.defaultvalue} onBlur={e => props.setvalue(e.target.value)} />
+    </fieldset>);
+}
+
+function CreateButton (props)
+{
+  return (<button onClick={e => props.create({trigger: true})}>Maak test</button>);
 }
 
 export default App;

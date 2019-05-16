@@ -35,3 +35,6 @@ This client depends on:
 * `perspectives-proxy`
 
 The latter module is not required by the App itself, but as an external dependency by both `perspectives-core` and `perspectives-react`. Hence it is listed as a dependency in `package.json`.
+
+### System and user instances
+This client creates instances for `User`, `TrustedCluster` and `Systeem` if they cannot be found in its Couchdb. The instances are loaded from the file "src/model/systeemInstanties.crl".
