@@ -5,7 +5,8 @@ import {
     Context,
     Rol,
     View,
-    SetProperty} from "perspectives-react";
+    SetProperty,
+    PSView} from "perspectives-react";
 
 // Start the core. 4
 main();
@@ -34,9 +35,13 @@ class App extends Component
   }
 }
 
-function GebruikerNaam (props)
+function GebruikerNaam ()
 {
-  return <p><label>Gebruiker:</label>{props.voornaam + " " + props.achternaam}</p>;
+  return (
+    <PSView.Consumer>
+      {value => <p><label>Gebruiker:</label>{value.voornaam + " " + value.achternaam}</p>}
+    </PSView.Consumer>
+  );
 }
 
 function GebruikerVoornaamInput (props)
