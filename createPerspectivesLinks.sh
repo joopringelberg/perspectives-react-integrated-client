@@ -8,6 +8,6 @@ rm -R perspectives-core
 
 ln -s ../../perspectives-proxy perspectives-proxy
 ln -s ../../perspectives-react perspectives-react
-ln -s ../../perspectives-react perspectives-core
+ln -s ../../perspectives-core perspectives-core
 
 cd ..
