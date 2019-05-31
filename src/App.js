@@ -1,32 +1,34 @@
 import React, { Component } from "react";
 import "./App.css";
 import { main } from 'perspectives-core';
-import {
-    Context,
-    Rol,
-    RolBinding,
-    View,
-    ContextOfRole,
-    ExternalViewOfBoundContext,
-    ViewOnExternalRole,
-    SetProperty,
-    CreateContext,
-    DeleteContext,
-    ViewOnInternalRole,
-    PSView} from "perspectives-react";
 
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Tab from 'react-bootstrap/Tab';
+import Nav from 'react-bootstrap/Nav';
+// import Button from 'react-bootstrap/Button'; // to trigger webpack.
+
+//import TestBotActieScreen from './testBotActie.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Start the core. 4
+import Loadable from 'react-loadable';
+
+const LoadableTestBotActieScreen = Loadable({
+  loader: () => import('./testBotactie.js'),
+  loading: Loading,
+});
+
+function Loading(props) {
+  if (props.error) {
+    return <div>Error! <button onClick={ props.retry }>Retry</button></div>;
+  } else {
+    return <div>Loading...</div>;
+  }
+}
+
 main();
 
 class App extends Component
@@ -35,109 +37,40 @@ class App extends Component
   {
     return (
       <Container>
+        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
-            <header className="App-header">
-              <h1>Actie voorbeeld formulier</h1>
-            </header>
+            <Col>
+              <header className="App-header">
+                <h1>InPlace</h1>
+              </header>
+            </Col>
           </Row>
           <Row>
-            <Form>
-              <Context contexttype="model:Perspectives$PerspectivesSysteem" contextinstance="model:User$MijnSysteem">
-                <Rol rol="zaken">
-                  <RolBinding>
-                    <ContextOfRole>
-                      <ViewOnInternalRole viewname="allProps">
-                        <TestBotActie/>
-                      </ViewOnInternalRole>
-                    </ContextOfRole>
-                  </RolBinding>
-                </Rol>
-                <CreateContext rolname="zaken" contextname="model:TestBotActie$Test">
-                  <CreateButton/>
-                </CreateContext>
-                <Card>
-                  <Card.Body>
-                  <p>Als we hier de create button doen, heeft hij geen contextinstance en geen rolname.</p>
-                  </Card.Body>
-                </Card>
-              </Context>
-            </Form>
+            <Col sm={3}>
+              <Nav variant="pills" className="flex-column">
+                <Nav.Item>
+                  <Nav.Link eventKey="first">Mijn Systeem</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="second">Test Bot Actie</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Col>
+            <Col sm={9}>
+              <Tab.Content>
+                <Tab.Pane eventKey="first">
+                  <p>Mijn Systeem komt hier.</p>
+                </Tab.Pane>
+                <Tab.Pane eventKey="second">
+                  <LoadableTestBotActieScreen/>
+                </Tab.Pane>
+              </Tab.Content>
+            </Col>
           </Row>
+        </Tab.Container>
       </Container>
     );
   }
-}
-
-function TestBotActie (props)
-{
-  return (
-    <PSView.Consumer>
-      {value => <Card>
-            <Card.Body>
-              <Form.Group as={Row} controlId="testBotActie">
-                <Form.Label column sm="8">Afhankelijke property</Form.Label>
-                <Col sm="4">
-                  <Form.Control readOnly={true} plaintext="true" value={value.v2}></Form.Control>
-                </Col>
-              </Form.Group>
-              <SetProperty propertyname="trigger">
-                <TriggerInput/>
-              </SetProperty>
-              <SetProperty propertyname="v1">
-                <V1Input/>
-              </SetProperty>
-              <DeleteContext contextinstance={value.contextinstance}>
-                <DeleteButton/>
-              </DeleteContext>
-            </Card.Body>
-          </Card>
-        }
-    </PSView.Consumer>
-  );
-}
-
-function TriggerInput (props)
-{
-  return (
-    <Form.Group as={Row} controlId="triggerInput">
-      <Col sm="8">
-        <Form.Label>Actie aan of uit?</Form.Label>
-        <Form.Text className="text-muted">
-          Alleen als de trigger 'true' is, wordt de onafhankelijke property naar de afhankelijke gekopieerd.
-        </Form.Text>
-      </Col>
-      <Col sm="4">
-        <ToggleButtonGroup type="checkbox" defaultValue={props.defaultvalue} onBlur={e => props.setvalue(e.target.value)} >
-          <ToggleButton value={"true"}>true</ToggleButton>
-          <ToggleButton value={"false"}>false</ToggleButton>
-        </ToggleButtonGroup>
-      </Col>
-    </Form.Group>);
-}
-
-function V1Input (props)
-{
-  return (
-    <Form.Group as={Row} controlId="v1Input">
-      <Col sm="8">
-        <Form.Label>Geef de onafhankelijke property een waarde:</Form.Label>
-      </Col>
-      <Col sm="4">
-        <Form.Control defaultValue={props.defaultvalue} onBlur={e => props.setvalue(e.target.value)} />
-      </Col>
-    </Form.Group>
-  );
-}
-
-function CreateButton (props)
-{
-  const ctxt = {"interneProperties": {"model:TestBotActie$Test$binnenRolBeschrijving$trigger": ["true"]}};
-  return (<Button variant="primary" onClick={e => props.create(ctxt)}>Voeg een test toe</Button>);
-}
-
-function DeleteButton (props)
-{
-  return (<Button variant="danger" onClick={e => props.delete()}>Verwijder</Button>);
 }
 
 export default App;
