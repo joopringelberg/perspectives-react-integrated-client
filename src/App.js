@@ -3,17 +3,17 @@ import "./App.css";
 import { main } from 'perspectives-core';
 import {
     Context,
-    Rollen,
+    Rol,
     RolBinding,
     View,
     ContextOfRole,
     ExternalViewOfBoundContext,
     ViewOnExternalRole,
     SetProperty,
-    InternalViewOfBoundContext,
     CreateContext,
     DeleteContext,
-    ViewOnInternalRole } from "perspectives-react";
+    ViewOnInternalRole,
+    PSView} from "perspectives-react";
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -42,18 +42,16 @@ class App extends Component
           </Row>
           <Row>
             <Form>
-              <Context type="model:Perspectives$PerspectivesSysteem" contextinstance="model:User$MijnSysteem">
-                <Rollen rollen={[
-                  "zaken"
-                ]}>
-                  <RolBinding rolname="zaken">
+              <Context contexttype="model:Perspectives$PerspectivesSysteem" contextinstance="model:User$MijnSysteem">
+                <Rol rol="zaken">
+                  <RolBinding>
                     <ContextOfRole>
                       <ViewOnInternalRole viewname="allProps">
                         <TestBotActie/>
                       </ViewOnInternalRole>
                     </ContextOfRole>
                   </RolBinding>
-                </Rollen>
+                </Rol>
                 <CreateContext rolname="zaken" contextname="model:TestBotActie$Test">
                   <CreateButton/>
                 </CreateContext>
@@ -70,62 +68,31 @@ class App extends Component
   }
 }
 
-function GebruikerNaam (props)
-{
-  return <p><label>Gebruiker:</label>{props.voornaam + " " + props.achternaam}</p>;
-}
-
-function TrustedCluster_BuitenRol_Kaartje (props)
-{
-  return <p><label>TrustedCluster:</label>{props.naam}</p>;
-}
-
-function Models (props)
-{
-  return <p><label>Models:</label>{props.modellen}</p>;
-}
-
-function ModelId (props)
-{
-  return <li key={props.rolinstance}>{props.rolinstance}</li>;
-}
-
-function ClusterGenoot (props)
-{
-  return <p>Clustergenoot {props.voornaam} heeft url: {props.url}</p>;
-}
-
-function GebruikerVoornaamInput (props)
-{
-  return (<fieldset>
-    <legend>Verander de gebruikers' voornaam in:</legend>
-    <input defaultValue={props.defaultvalue} onBlur={e => props.setvalue(e.target.value)} />
-    </fieldset>);
-}
-
 function TestBotActie (props)
 {
   return (
-    <Card>
-      <Card.Body>
-        <Form.Group as={Row} controlId="testBotActie">
-          <Form.Label column sm="8">Afhankelijke property</Form.Label>
-          <Col sm="4">
-            <Form.Control readOnly="true" plaintext="true" value={props.v2}></Form.Control>
-          </Col>
-        </Form.Group>
-        <SetProperty propertyname="trigger" namespace={props.namespace} rolinstance={props.rolinstance} rolname={props.rolname} value={props.trigger}>
-          <TriggerInput/>
-        </SetProperty>
-
-        <SetProperty propertyname="v1" namespace={props.namespace} rolinstance={props.rolinstance} rolname={props.rolname} value={props.v1}>
-          <V1Input/>
-        </SetProperty>
-        <DeleteContext contextinstance={props.contextinstance}>
-          <DeleteButton/>
-        </DeleteContext>
-      </Card.Body>
-    </Card>
+    <PSView.Consumer>
+      {value => <Card>
+            <Card.Body>
+              <Form.Group as={Row} controlId="testBotActie">
+                <Form.Label column sm="8">Afhankelijke property</Form.Label>
+                <Col sm="4">
+                  <Form.Control readOnly={true} plaintext="true" value={value.v2}></Form.Control>
+                </Col>
+              </Form.Group>
+              <SetProperty propertyname="trigger">
+                <TriggerInput/>
+              </SetProperty>
+              <SetProperty propertyname="v1">
+                <V1Input/>
+              </SetProperty>
+              <DeleteContext contextinstance={value.contextinstance}>
+                <DeleteButton/>
+              </DeleteContext>
+            </Card.Body>
+          </Card>
+        }
+    </PSView.Consumer>
   );
 }
 
@@ -164,7 +131,8 @@ function V1Input (props)
 
 function CreateButton (props)
 {
-  return (<Button variant="primary" onClick={e => props.create({"model:TestBotActie$Test$binnenRolBeschrijving$trigger": ["true"]})}>Voeg een test toe</Button>);
+  const ctxt = {"interneProperties": {"model:TestBotActie$Test$binnenRolBeschrijving$trigger": ["true"]}};
+  return (<Button variant="primary" onClick={e => props.create(ctxt)}>Voeg een test toe</Button>);
 }
 
 function DeleteButton (props)
