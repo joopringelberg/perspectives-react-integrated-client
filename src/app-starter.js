@@ -1,8 +1,10 @@
 "use strict";
 
+const path = require("path");
 const electron = require("electron");
+const { app, protocol } = require('electron');
 // Module to control application life.
-const app = electron.app;
+// const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
@@ -13,8 +15,26 @@ const port = process.env.WEBPACK_DEVSERVER_PORT || 3456;
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+// Protocol will be "app://./…"
+const scheme = 'app';
+
+/* Protocol */
+// Registering must be done before app::ready fires
+// (Optional) Technically not a standard scheme but works as needed
+protocol.registerSchemesAsPrivileged(
+  [
+    { scheme: scheme, privileges: { bypassCSP: true, standard: true, secure: true, supportFetchAPI: true, corsEnabled: true } }
+  ]);
+
 function createWindow ()
 {
+
+  // Base path used to resolve modules
+  const base = app.getAppPath();
+
+  // Create protocol
+  require('./createProtocol.js')(scheme, base);
+
   // Create the browser window.
   // mainWindow = new BrowserWindow({width: 800, height: 600})
   mainWindow = new BrowserWindow(
@@ -25,7 +45,8 @@ function createWindow ()
       }
     });
 
-  mainWindow.loadURL("http://localhost:" + port + "/index.html");
+  // mainWindow.loadURL("http://localhost:" + port + "/index.html");
+  mainWindow.loadURL("file://" + path.join(__dirname, "../public/index.html" ));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

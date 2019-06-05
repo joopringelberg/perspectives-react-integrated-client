@@ -1,21 +1,38 @@
 const path = require("path");
 
 // The default port is 5678. Configure a port by providing the environment variable WEBPACK_DEVSERVER_PORT with a value.
-const port = process.env.WEBPACK_DEVSERVER_PORT || 5678;
+// const port = process.env.WEBPACK_DEVSERVER_PORT || 5678;
 
 module.exports = {
-  entry: path.join(__dirname, "src/index.js" ),
+  entry:
+    { index: path.join(__dirname, "src/index.js" )
+    // , Perspectives: path.join(__dirname, "src/Perspectives.js" )
+  },
   // output: {path: path.join(__dirname, 'public'), filename: "bundle.js"},
   output: {
-      filename: '[name].bundle.js',
-      chunkFilename: '[name].bundle.js',
+      filename: '[name].js',
+      chunkFilename: '[name].js',
       path: path.resolve(__dirname, 'public')
     },
-  watch: true,
+  externals: {
+    myImporter: "myImport",
+    react: "React"
+  },
+  watch: false,
   mode: "development",
   target: "electron-renderer",
+  plugins: [
+    ],
   module: {
     rules: [
+      {
+        test: /\.crl$/,
+        loader: 'ignore-loader'
+      },
+      {
+        test: /\.html$/,
+        loader: 'ignore-loader'
+      },
       {
         test: /.jsx?$/,
         exclude: /node_modules/,
@@ -43,9 +60,11 @@ module.exports = {
       Public: path.resolve( __dirname, "public")
     },
     symlinks: false
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    port: port
   }
+  // , devServer: {
+  //     publicPath: "/",
+  //     contentBase: path.join(__dirname, 'public'),
+  //     port: port,
+  //     watchContentBase: false
+  // }
 };
