@@ -3,6 +3,8 @@ import "./App.css";
 import { main } from 'perspectives-core';
 import myImport from 'myImporter';
 
+import "./globals.js"
+
 import {
     Context,
     Rol,
@@ -94,8 +96,7 @@ function Screen(value)
     loader: () => myImport(getModelName( value.roltype )).then(
       function(r)
       {
-        // TODO. Veralgemeniseer dit!
-        return r.PerspectivesSysteem;
+        return r.default;
       }
     ), // haalt bestand Perspectives.js op
     loading: Loading,

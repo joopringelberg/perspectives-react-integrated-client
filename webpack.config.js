@@ -15,8 +15,7 @@ module.exports = {
       path: path.resolve(__dirname, 'public')
     },
   externals: {
-    myImporter: "myImport",
-    react: "React"
+    myImporter: "myImport"
   },
   watch: false,
   mode: "development",
