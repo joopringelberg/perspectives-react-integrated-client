@@ -1,7 +1,7 @@
 import React, { Component } from "react";// 17
 import "./App.css";
 import { main } from 'perspectives-core';
-import importModule from 'myImporter';
+import importModule from 'appImporter';
 
 import "./externals.js"
 
