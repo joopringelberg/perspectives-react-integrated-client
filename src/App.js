@@ -1,7 +1,7 @@
 import React, { Component } from "react";// 17
 import "./App.css";
 import { main } from 'perspectives-core';
-import importModule from 'appImporter';
+import {importRoleScreen} from './appImporter.js';
 
 import "./externals.js"
 
@@ -93,7 +93,7 @@ class App extends Component
 function Screen(value)
 {
   const LoadableScreen = Loadable({
-    loader: () => importModule( value.roltype ), // haalt bestand Perspectives.js op
+    loader: () => importRoleScreen( value.roltype ),
     loading: Loading,
   });
   return <Tab.Pane eventKey={value.rolinstance}>

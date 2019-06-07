@@ -15,7 +15,7 @@ module.exports = {
       path: path.resolve(__dirname, 'public')
     },
   externals: {
-    appImporter: "importModule"
+    importModule: "importModule"
   },
   watch: false,
   mode: "development",
