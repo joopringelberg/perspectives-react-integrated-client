@@ -1,7 +1,6 @@
 import React, { Component } from "react";// 17
 import "./App.css";
 import { main } from 'perspectives-core';
-import {importRoleScreen} from './appImporter.js';
 
 import "./externals.js"
 
@@ -12,7 +11,8 @@ import {
     PSRol,
     PSView,
     RolBinding,
-    getModelName} from "perspectives-react";
+    getModelName,
+    Screen} from "perspectives-react";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -22,21 +22,6 @@ import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import Loadable from 'react-loadable';
-
-// const LoadableTestBotActieScreen = Loadable({
-//   loader: () => import('./testBotactie.js'),
-//   loading: Loading,
-// });
-
-function Loading(props) {
-  if (props.error) {
-    return <div>Error! <button onClick={ props.retry }>Retry</button></div>;
-  } else {
-    return <div>Loading...</div>;
-  }
-}
 
 main();
 
@@ -76,7 +61,9 @@ class App extends Component
                   <Rol rol="indexedContexts">
                     <RolBinding>
                       <PSRol.Consumer>
-                        {Screen}
+                        {value => <Tab.Pane eventKey={value.rolinstance}>
+                            <Screen roltype={value.roltype}/>
+                          </Tab.Pane>                        }
                       </PSRol.Consumer>
                     </RolBinding>
                   </Rol>
@@ -88,17 +75,6 @@ class App extends Component
       </Container>
     );
   }
-}
-
-function Screen(value)
-{
-  const LoadableScreen = Loadable({
-    loader: () => importRoleScreen( value.roltype ),
-    loading: Loading,
-  });
-  return <Tab.Pane eventKey={value.rolinstance}>
-      <LoadableScreen/>
-    </Tab.Pane>
 }
 
 export default App;

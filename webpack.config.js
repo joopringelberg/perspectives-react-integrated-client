@@ -14,9 +14,7 @@ module.exports = {
       chunkFilename: '[name].js',
       path: path.resolve(__dirname, 'public')
     },
-  externals: {
-    importModule: "importModule"
-  },
+  externals: {},
   watch: false,
   mode: "development",
   target: "electron-renderer",
@@ -55,8 +53,9 @@ module.exports = {
     ]
   },
   resolve: {
-    alias: {
-      Public: path.resolve( __dirname, "public")
+    alias:
+      { Public: path.resolve( __dirname, "public")
+      , PerspectivesGlobals: path.resolve( __dirname, "src/perspectivesGlobals.js")
     },
     symlinks: false
   }
