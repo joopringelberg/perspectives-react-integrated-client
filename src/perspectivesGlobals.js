@@ -1,7 +1,5 @@
 // Start of a settings-like file.
 
-const PerspectivesGlobals =
+export default
   { host: "http://localhost:5984/"
   }
-
-export {PerspectivesGlobals};
