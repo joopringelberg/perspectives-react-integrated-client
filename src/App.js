@@ -1,4 +1,4 @@
-import React, { Component } from "react";// 17
+import React, { Component } from "react";// 18
 import "./App.css";
 import { main } from 'perspectives-core';
 
@@ -20,6 +20,9 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
+import Octicon, {Trashcan} from '@primer/octicons-react'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -31,15 +34,17 @@ class App extends Component
   {
     return (
       <Container>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">InPlace</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+            </Nav>
+            <Octicon icon={Trashcan} size='medium'/>
+          </Navbar.Collapse>
+        </Navbar>
         <Context contexttype="model:Perspectives$PerspectivesSysteem" contextinstance="model:User$MijnSysteem">
           <Tab.Container id="left-tabs-example" defaultActiveKey="first" mountOnEnter={true}>
-            <Row>
-              <Col>
-                <header className="App-header">
-                  <h1>InPlace</h1>
-                </header>
-              </Col>
-            </Row>
             <Row>
               <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
