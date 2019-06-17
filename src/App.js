@@ -12,7 +12,8 @@ import {
     PSView,
     RolBinding,
     getModelName,
-    Screen} from "perspectives-react";
+    Screen,
+    RemoveRol} from "perspectives-react";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -40,7 +41,9 @@ class App extends Component
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
             </Nav>
-            <Octicon icon={Trashcan} size='medium'/>
+            <RemoveRol>
+              <Trash/>
+            </RemoveRol>
           </Navbar.Collapse>
         </Navbar>
         <Context contexttype="model:Perspectives$PerspectivesSysteem" contextinstance="model:User$MijnSysteem">
@@ -80,6 +83,14 @@ class App extends Component
       </Container>
     );
   }
+}
+
+function Trash(props)
+{
+  return  <div onDragOver={ev => ev.preventDefault()}
+              onDrop={ev => props.removeBinding( JSON.parse( ev.dataTransfer.getData("PSRol") ) )}>
+            <Octicon icon={Trashcan} size='medium'/>
+          </div>
 }
 
 export default App;
