@@ -88,7 +88,9 @@ class App extends Component
 function Trash(props)
 {
   return  <div onDragOver={ev => ev.preventDefault()}
-              onDrop={ev => props.removeBinding( JSON.parse( ev.dataTransfer.getData("PSRol") ) )}>
+              onDrop={ev => {props.removeBinding( JSON.parse( ev.dataTransfer.getData("PSRol") ) ); ev.target.classList.remove("border", "p-3", "border-primary")}}
+              onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
+              onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
             <Octicon icon={Trashcan} size='medium'/>
           </div>
 }
