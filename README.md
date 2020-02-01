@@ -37,4 +37,13 @@ This client depends on:
 The latter module is not required by the App itself, but as an external dependency by both `perspectives-core` and `perspectives-react`. Hence it is listed as a dependency in `package.json`.
 
 ### System and user instances
-This client creates instances for `User`, `TrustedCluster` and `Systeem` if they cannot be found in its Couchdb. The instances are loaded from the file "src/model/systeemInstanties.crl".
+This client creates instances for `User`, `TrustedCluster` and `Systeem` if they cannot be found in its Couchdb. The instances are loaded from the the model itself.
+
+### Test-using this program
+It should be noted that this program is in an alpha-stage. Currently we have the very first release published. In order to test-drive it, you will have to install the package with all its dependencies. Also, don't forget to install Couchdb! Then evaluate in a console:
+
+```
+$npm run serve
+$npm run electron
+```
+This will bring up the Electron client showing the starting screen.

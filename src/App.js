@@ -7,10 +7,10 @@ import "./externals.js"
 import {
     Context,
     Rol,
-    View,
     PSRol,
     PSView,
     RolBinding,
+    ExternalViewOfBoundContext,
     getModelName,
     Screen,
     RemoveRol} from "perspectives-react";
@@ -46,32 +46,31 @@ class App extends Component
             </RemoveRol>
           </Navbar.Collapse>
         </Navbar>
-        <Context contexttype="model:Perspectives$PerspectivesSysteem" contextinstance="model:User$MijnSysteem">
+        <Context contexttype="model:System$PerspectivesSystem" contextinstance="model:User$MijnSysteem">
           <Tab.Container id="left-tabs-example" defaultActiveKey="first" mountOnEnter={true}>
             <Row>
               <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
-                  <Rol rol="indexedContexts">
-                    <RolBinding>
-                      <View viewname="allProperties">
-                        <PSView.Consumer>
-                          {value => <Nav.Item>
-                              <Nav.Link eventKey={value.rolinstance}>{value.contextLabel}</Nav.Link>
-                            </Nav.Item>}
-                        </PSView.Consumer>
-                      </View>
-                    </RolBinding>
+                  <Rol rol="IndexedContexts">
+                    <ExternalViewOfBoundContext viewname="allProperties">
+                      <PSView.Consumer>
+                        {value => <Nav.Item>
+                            <Nav.Link eventKey={value.rolinstance}>{value.propval("Name")}</Nav.Link>
+                          </Nav.Item>}
+                      </PSView.Consumer>
+                    </ExternalViewOfBoundContext>
                   </Rol>
                 </Nav>
               </Col>
               <Col sm={9}>
                 <Tab.Content>
-                  <Rol rol="indexedContexts">
+                  <Rol rol="IndexedContexts">
                     <RolBinding>
                       <PSRol.Consumer>
                         {value => <Tab.Pane eventKey={value.rolinstance}>
-                            <Screen roltype={value.roltype}/>
-                          </Tab.Pane>                        }
+                            <Screen rolinstance={value.rolinstance}/>
+                          </Tab.Pane>
+                        }
                       </PSRol.Consumer>
                     </RolBinding>
                   </Rol>

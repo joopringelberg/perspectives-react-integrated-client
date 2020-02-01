@@ -16,9 +16,9 @@
   "dependencies": {
     "@primer/octicons-react": "^9.0.0",
     "bootstrap": "^4.3.1",
-    "perspectives-core": "https://github.com/joopringelberg/perspectives-core.git",
-    "perspectives-proxy": "git+https://github.com/joopringelberg/perspectives-proxy.git",
-    "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git",
+    "perspectives-core": "https://github.com/joopringelberg/perspectives-core.git#v0.2.0",
+    "perspectives-proxy": "git+https://github.com/joopringelberg/perspectives-proxy.git#v1.2.0",
+    "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git#v0.2.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6"
