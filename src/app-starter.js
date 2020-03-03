@@ -9,7 +9,7 @@ const { app, protocol } = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 
 // The default port is 3456. Configure a port by providing the environment variable WEBPACK_DEVSERVER_PORT with a value.
-const port = process.env.WEBPACK_DEVSERVER_PORT || 3456;
+const port = process.env.WEBPACK_DEVSERVER_PORT || 5678;
 
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -31,7 +31,7 @@ function createWindow ()
       }
     });
 
-  // mainWindow.loadURL("http://localhost:" + port + "/index.html");
+  // mainWindow.loadURL("http://localhost:" + port + "/public/index.html");
   mainWindow.loadURL("file://" + path.join(__dirname, "../public/index.html" ));
 
   // Open the DevTools.
