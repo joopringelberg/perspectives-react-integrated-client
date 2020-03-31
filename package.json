@@ -1,6 +1,6 @@
 {
   "name": "perspectives-react-integrated-client",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A client with the core built-in.",
   "private": true,
   "main": "src/app-starter.js",
@@ -9,16 +9,17 @@
     "watch": "webpack --watch",
     "electron": "WEBPACK_DEVSERVER_PORT=5678 electron .",
     "serve": "WEBPACK_DEVSERVER_PORT=5678 webpack-dev-server --port 5678",
-    "symlinks": "./createPerspectivesLinks.sh"
+    "symlinks": "./createPerspectivesLinks.sh",
+    "build": "webpack"
   },
   "author": "Joop Ringelberg",
   "license": "ISC",
   "dependencies": {
     "@primer/octicons-react": "^9.0.0",
     "bootstrap": "^4.3.1",
-    "perspectives-core": "https://github.com/joopringelberg/perspectives-core.git#v0.3.0",
+    "perspectives-core": "https://github.com/joopringelberg/perspectives-core.git#v0.4.0",
     "perspectives-proxy": "git+https://github.com/joopringelberg/perspectives-proxy.git#v1.3.0",
-    "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git#v0.3.0",
+    "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git#v0.4.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6"

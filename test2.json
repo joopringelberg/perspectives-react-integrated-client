@@ -1,91 +1,17 @@
-(DomeinFile {
-  _id: "model:ContextAndRole",
-  _rev: Nothing,
-  actions: (fromFoldable [
-  (Tuple
-  "model:ContextAndRole$TestCase$Self_bot$ChangeSelf"
-  (Action
-  {
-    _id: ActionType
-    model: ContextAndRole$TestCase$Self_bot$ChangeSelf,
-    _rev: Nothing,
-    condition: (Q
-    (SQD
-    (CDOM
-    (ST
-    ContextType
-    model: ContextAndRole$TestCase))
-    (Constant
-    PBool
-    "true"
-    )
-    (VDOM
-    PBool)
-    True
-    True)),
-    displayName: "",
-    effect: (Just
-    (EF
-    (UQD
-    (CDOM
-    (ST
-    ContextType
-    model: ContextAndRole$TestCase))
-    (CreateRole
-    EnumeratedRoleType
-    model: ContextAndRole$TestCase$SomeRole)
-    (SQD
-    (CDOM
-    (ST
-    ContextType
-    model: ContextAndRole$TestCase))
-    Identity
-    (CDOM
-    (ST
-    ContextType
-    model: ContextAndRole$TestCase))
-    True
-    True)
-    (CDOM
-    (ST
-    ContextType
-    model: ContextAndRole$TestCase))
-    True
-    True))),
-    executedByBot: true,
-    indirectObject: Nothing,
-    object: ENR
-    EnumeratedRoleType
-    model: ContextAndRole$TestCase$Self,
-    pos: (ArcPosition
-  {
-    column: 9,
-    line: 9
+{
+  "seq": "5-g1AAAACTeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEhFyjAbmiSYmZgnpzCwFmal5KalpmXmoJHex4LkGRoAFL_oaawQkwxtrQwSUzCpi8LAK4wLTk",
+  "id": "test1",
+  "changes": [
+    {
+      "rev": "5-aed845fc8a9d2278fcc93135d36d21d8"
+    }
+  ],
+  "doc": {
+    "_id": "test1",
+    "_rev": "5-aed845fc8a9d2278fcc93135d36d21d8",
+    "contents": {
+      "test": "Hello world!"
+    },
+    "tag": "TestDoc"
   }
-  ),
-  requiredIndirectObjectProperties
-  :
-  Nothing,
-  requiredObjectProperties
-  :
-  Nothing,
-  requiredSubjectProperties
-  :
-  Nothing,
-  subject
-  :
-  EnumeratedRoleType
-  model
-  :
-  ContextAndRole$TestCase$Self,
-  verb
-  :
-  Change
-  }
-  ))
-]), calculatedProperties: (fromFoldable []), calculatedRoles: (fromFoldable []), contexts: (fromFoldable [
-(Tuple "model:ContextAndRole$TestCase$NestedCase" (Context {_id: ContextType model: ContextAndRole$TestCase$NestedCase, _rev: Nothing, actions: [], context: (Just ContextType model: ContextAndRole$TestCase), contextAspects: [], contextRol: [], defaultPrototype: Nothing, displayName: "NestedCase", gebruikerRol: [], kindOfContext: Case, nestedContexts: [], pos: (ArcPosition {column: 11, line: 11}), rolInContext: [] })), (Tuple "model:ContextAndRole$TestCase" (Context {_id: ContextType model: ContextAndRole$TestCase, _rev: Nothing, actions: [], context: (Just ContextType model: ContextAndRole), contextAspects: [], contextRol: [ENR EnumeratedRoleType model: ContextAndRole$TestCase$AContextRole], defaultPrototype: Nothing, displayName: "TestCase", gebruikerRol: [EnumeratedRoleType model: ContextAndRole$TestCase$Self], kindOfContext: Case, nestedContexts: [ContextType model: ContextAndRole$TestCase$NestedCase], pos: (ArcPosition {column: 9, line: 2}), rolInContext: [ENR EnumeratedRoleType model: ContextAndRole$TestCase$SomeRole] })), (Tuple "model:ContextAndRole" (Context {_id: ContextType model: ContextAndRole, _rev: Nothing, actions: [], context: Nothing, contextAspects: [], contextRol: [], defaultPrototype: Nothing, displayName: "ContextAndRole", gebruikerRol: [], kindOfContext: Domain, nestedContexts: [ContextType model: ContextAndRole$TestCase], pos: (ArcPosition {column: 9, line: 1}), rolInContext: [] }))
-]), enumeratedProperties: (fromFoldable [(Tuple "model:ContextAndRole$TestCase$Self$Prop1" (EnumeratedProperty {_id: EnumeratedPropertyType model: ContextAndRole$TestCase$Self$Prop1, _rev: Nothing, displayName: "Prop1", functional: false, mandatory: true, pos: (ArcPosition {column: 7, line: 4}), range: PNumber, role: EnumeratedRoleType model:ContextAndRole$TestCase$Self}))]), enumeratedRoles: (fromFoldable [
-(Tuple "model:ContextAndRole$External" (EnumeratedRole {_id: EnumeratedRoleType model: ContextAndRole$External, _rev: Nothing, binding: EMPTY, context: ContextType model: ContextAndRole, displayName: "External", functional: true, kindOfRole: ExternalRole, mandatory: false, perspectives: (fromFoldable []), pos: (ArcPosition {column: 9, line: 1}), properties: [], roleAspects: [], views: [] })), (Tuple "model:ContextAndRole$TestCase$External" (EnumeratedRole {_id: EnumeratedRoleType model: ContextAndRole$TestCase$External, _rev: Nothing, binding: EMPTY, context: ContextType model: ContextAndRole$TestCase, displayName: "External", functional: true, kindOfRole: ExternalRole, mandatory: false, perspectives: (fromFoldable []), pos: (ArcPosition {column: 9, line: 2}), properties: [], roleAspects: [], views: [] })), (Tuple "model:ContextAndRole$TestCase$Self" (EnumeratedRole {_id: EnumeratedRoleType model: ContextAndRole$TestCase$Self, _rev: Nothing, binding: EMPTY, context: ContextType model: ContextAndRole$TestCase, displayName: "Self", functional: true, kindOfRole: UserRole, mandatory: false, perspectives: (fromFoldable [(Tuple "Self" [ActionType model: ContextAndRole$TestCase$Self_bot$ChangeSelf])]), pos: (ArcPosition {column: 5, line: 3}), properties: [EnumeratedPropertyType model: ContextAndRole$TestCase$Self$Prop1], roleAspects: [], views: [] })), (Tuple "model:ContextAndRole$TestCase$SomeRole" (EnumeratedRole {_id: EnumeratedRoleType model: ContextAndRole$TestCase$SomeRole, _rev: Nothing, binding: EMPTY, context: ContextType model: ContextAndRole$TestCase, displayName: "SomeRole", functional: true, kindOfRole: RoleInContext, mandatory: false, perspectives: (fromFoldable []), pos: (ArcPosition {column: 5, line: 5}), properties: [], roleAspects: [], views: [] })), (Tuple "model:ContextAndRole$TestCase$AContextRole" (EnumeratedRole {_id: EnumeratedRoleType model: ContextAndRole$TestCase$AContextRole, _rev: Nothing, binding: (ST EnumeratedRoleType model: ContextAndRole$TestCase$NestedCase$External), context: ContextType model: ContextAndRole$TestCase, displayName: "AContextRole", functional: true, kindOfRole: ContextRole, mandatory: false, perspectives: (fromFoldable []), pos: (ArcPosition {column: 5, line: 6}), properties: [], roleAspects: [], views: [] })), (Tuple "model:ContextAndRole$TestCase$NestedCase$External" (EnumeratedRole {_id: EnumeratedRoleType model: ContextAndRole$TestCase$NestedCase$External, _rev: Nothing, binding: EMPTY, context: ContextType model: ContextAndRole$TestCase$NestedCase, displayName: "External", functional: true, kindOfRole: ExternalRole, mandatory: false, perspectives: (fromFoldable []), pos: (ArcPosition {column: 11, line: 11}), properties: [], roleAspects: [], views: [] }))
-]), views: (fromFoldable [])
-})
+}

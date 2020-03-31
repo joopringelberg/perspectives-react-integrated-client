@@ -13,7 +13,8 @@ import {
     ExternalViewOfBoundContext,
     getModelName,
     Screen,
-    RemoveRol} from "perspectives-react";
+    RemoveRol,
+    MySystem} from "perspectives-react";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -142,7 +143,7 @@ class App extends Component
             </Navbar.Collapse>
           </Navbar>
           <div>
-            <Context contexttype="model:System$PerspectivesSystem" contextinstance="model:User$MijnSysteem">
+            <MySystem>
               <Tab.Container id="left-tabs-example" defaultActiveKey="first" mountOnEnter={true}>
                 <Row>
                   <Col lg={3}>
@@ -174,7 +175,7 @@ class App extends Component
                   </Col>
                 </Row>
               </Tab.Container>
-            </Context>
+            </MySystem>
           </div>
         </Container>
       );
