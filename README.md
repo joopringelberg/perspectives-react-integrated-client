@@ -5,6 +5,14 @@ perspectives-react-integrated-client
 This client includes the perspectives-core. It uses the internal channel to communicate with the core. However, the core will also listen on TCP port 7777.
 
 ### Develop this interface
+The file `app-starter.js` has the following two lines:
+
+```
+// mainWindow.loadURL("http://localhost:" + port + "/public/index.html");
+mainWindow.loadURL("file://" + path.join(__dirname, "../public/index.html" ));
+```
+If the first line is commented out, to run the program, run the server first (`npm run serve`). Otherwise, this is not needed.
+
 1. `$npm run serve` to start the development server (that serves the bundled code on port 5678).
 2. `npm run electron` to start the interface (the browser, that tries to read from port 5678). **Note**: this will also start perspectives-core listening on port 7777!
 3. `npm run watch` before changing code, otherwise changes will not be reflected in the interface!
@@ -40,10 +48,11 @@ The latter module is not required by the App itself, but as an external dependen
 This client creates instances for `User`, `TrustedCluster` and `Systeem` if they cannot be found in its Couchdb. The instances are loaded from the the model itself.
 
 ### Test-using this program
-It should be noted that this program is in an alpha-stage. Currently we have the very first release published. In order to test-drive it, you will have to install the package with all its dependencies. Also, don't forget to install Couchdb! Then evaluate in a console:
+It should be noted that this program is in an alpha-stage. Currently we have the very first release published. In order to test-drive it, you will have to install the package with all its dependencies. Also, don't forget to install Couchdb (version 2.1.1)! Then evaluate in a console:
 
 ```
 $npm run serve
 $npm run electron
 ```
 This will bring up the Electron client showing the starting screen.
+NOTE: if `app-starter-js` reads `index.html` from disk, the server need not be started.
