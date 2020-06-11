@@ -2,7 +2,10 @@
 
 const path = require("path");
 const electron = require("electron");
+const { ipcMain } = require('electron');
 const { app, protocol } = require('electron');
+const yargs = require('yargs');
+
 // Module to control application life.
 // const app = electron.app;
 // Module to create native browser window.
@@ -10,6 +13,24 @@ const BrowserWindow = electron.BrowserWindow;
 
 // The default port is 3456. Configure a port by providing the environment variable WEBPACK_DEVSERVER_PORT with a value.
 const port = process.env.WEBPACK_DEVSERVER_PORT || 5678;
+
+////////////////////////////////////////////////////////////////////////////////
+//// COMMAND LINE ARGUMENTS
+////////////////////////////////////////////////////////////////////////////////
+const argv = yargs
+    .option('devtools', {
+        alias: 'd',
+        description: 'Open devtools in client window',
+        type: 'boolean',
+    })
+    .help()
+    .alias('help', 'h')
+    .argv;
+
+
+////////////////////////////////////////////////////////////////////////////////
+//// MAIN WINDOW
+////////////////////////////////////////////////////////////////////////////////
 
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -25,6 +46,8 @@ function createWindow ()
   // mainWindow = new BrowserWindow({width: 800, height: 600})
   mainWindow = new BrowserWindow(
     {
+      width: 1280,
+      height: 400,
       webPreferences: {
         nodeIntegration: true
         // preload: './preload.js'
@@ -35,7 +58,10 @@ function createWindow ()
   mainWindow.loadURL("file://" + path.join(__dirname, "../public/index.html" ));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (argv.devtools)
+  {
+    mainWindow.webContents.openDevTools();
+  }
 
   // Emitted when the window is closed.
   mainWindow.on("closed", function ()
@@ -45,6 +71,14 @@ function createWindow ()
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  // Handle dragging a file out to the file system.
+  ipcMain.on('ondragstart', (event, filePath) => {
+    event.sender.startDrag(
+      { file: filePath
+      , icon: process.cwd() + '/public/file.png'
+    })
+  })
 }
 
 // This method will be called when Electron has finished

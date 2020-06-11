@@ -1,6 +1,6 @@
 import React, { Component } from "react";// 19
 import "./App.css";
-import { authenticate } from 'perspectives-core';
+import { authenticate, resetAccount } from 'perspectives-core';
 
 import "./externals.js"
 
@@ -14,6 +14,7 @@ import {
     getModelName,
     Screen,
     RemoveRol,
+    importContexts,
     MySystem} from "perspectives-react";
 
 import Container from 'react-bootstrap/Container';
@@ -26,10 +27,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 import Octicon, {Trashcan, CloudDownload} from '@primer/octicons-react'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+const Perspectives = require("perspectives-proxy").Perspectives;
 
 class App extends Component
 {
@@ -42,6 +46,7 @@ class App extends Component
       , username: ""
       , password: ""
       , authenticationFeedback: undefined
+      , resetAccount: false
       , setusername: function(usr)
         {
           component.setState({username: usr, authenticationFeedback: undefined});
@@ -69,6 +74,10 @@ class App extends Component
                   // OK
                   case 2:
                     component.setState({notLoggedIn: false})
+                    if (component.state.resetAccount)
+                    {
+                      resetAccount(component.state.username)(component.state.password)();
+                    }
                     break;
               }
             }
@@ -96,7 +105,7 @@ class App extends Component
                 </Col>
                 <Col sm="8">
                   <Form.Control
-                  placeholder="Username" aria-label="Username" onBlur={e => component.state.setusername(e.target.value)}/>
+                  placeholder="Username" aria-label="Username" onBlur={e => component.state.setusername(e.target.value)} autoFocus/>
                 </Col>
               </Form.Group>
               <Form.Group as={Row} controlId="password">
@@ -106,6 +115,16 @@ class App extends Component
                 </Col>
               </Form.Group>
               <Button variant="primary" onClick={e => component.state.authenticate()}>Login</Button>
+              <Form.Group>
+                <Col sm="6">
+                  <Form.Label>Check to reset account (removes all data!):</Form.Label>
+                </Col>
+                <Col sm="6">
+                <InputGroup.Checkbox
+                  aria-label="Check to reset account"
+                  onChange={e => component.setState( {resetAccount: e.target.value == "on" } ) }/>
+                </Col>
+              </Form.Group>
               <Form.Group>
                 <br/>
                 {(component.state.authenticationFeedback) &&
@@ -145,8 +164,8 @@ class App extends Component
           <div>
             <MySystem>
               <Tab.Container id="left-tabs-example" defaultActiveKey="first" mountOnEnter={true}>
-                <Row>
-                  <Col lg={3}>
+                <Row className="align-items-stretch">
+                  <Col lg={3} className="App-border-right">
                     <Nav variant="pills" className="flex-column">
                       <Rol rol="IndexedContexts">
                         <ExternalViewOfBoundContext viewname="allProperties">
@@ -196,7 +215,7 @@ function Trash(props)
 function Download(props)
 {
   return  <div onDragOver={ev => ev.preventDefault()}
-              onDrop={ev => {alert(ev.dataTransfer.files[0].type); ev.target.classList.remove("border", "p-3", "border-primary")}}
+              onDrop={ev => {importContexts(ev.dataTransfer.files); ev.target.classList.remove("border", "p-3", "border-primary")}}
               onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
               onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
             <Octicon icon={CloudDownload} size='medium'/>
