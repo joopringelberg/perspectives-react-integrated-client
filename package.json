@@ -10,7 +10,7 @@
     "electron": "WEBPACK_DEVSERVER_PORT=5678 electron . -d=true",
     "serve": "WEBPACK_DEVSERVER_PORT=5678 webpack-dev-server --port 5678",
     "symlinks": "./createPerspectivesLinks.sh",
-    "build": "webpack"
+    "build": "./build.sh"
   },
   "author": "Joop Ringelberg",
   "license": "ISC",
