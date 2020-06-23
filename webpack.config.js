@@ -51,14 +51,8 @@ module.exports = {
         use: [ 'style-loader', 'css-loader' ]
       }
     ]
-  },
-  resolve: {
-    alias:
-      { Public: path.resolve( __dirname, "public")
-      , PerspectivesGlobals: path.resolve( __dirname, "src/perspectivesGlobals.js")
-    },
-    symlinks: false
   }
+  // }
   // , devServer: {
   //     publicPath: "/",
   //     contentBase: path.join(__dirname, 'public'),
