@@ -56,3 +56,6 @@ $npm run electron
 ```
 This will bring up the Electron client showing the starting screen.
 NOTE: if `app-starter-js` reads `index.html` from disk, the server need not be started.
+
+### More documentation ###
+Please see [Structure of integrated-client](https://joopringelberg.github.io/perspectives-documentation/Synchronisation.pdf) for a more detailed documentation of the structure of this application.
