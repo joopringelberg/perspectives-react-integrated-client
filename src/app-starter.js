@@ -4,6 +4,7 @@ const path = require("path");
 const electron = require("electron");
 const { ipcMain } = require('electron');
 const { app, protocol } = require('electron');
+const {autoUpdater} = require("electron-updater");
 const yargs = require('yargs');
 
 // Module to control application life.
@@ -84,6 +85,16 @@ function createWindow ()
     })
   })
 }
+
+//-------------------------------------------------------------------
+// Auto updates - Option 1 - Simplest version (from: https://github.com/iffy/electron-updater-example/blob/master/main.js)
+//
+// This will immediately download an update, then install when the
+// app quits.
+//-------------------------------------------------------------------
+app.on('ready', function()  {
+  autoUpdater.checkForUpdatesAndNotify();
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
