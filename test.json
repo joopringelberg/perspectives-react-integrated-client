@@ -1,6 +1,0 @@
-MessageEvent {
-  type: 'message',
-  data: '{"seq":"7-g1AAAAB5eJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuRAY-iPBYgydAApP6D1GYwJ7LnAgXYDY0tLUwSk7DpywIA6hkmdA","id":"test1","changes":[{"rev":"7-dcb195a59c23f1df8c30774dfa2cc910"}],"doc":{"_id":"test1","_rev":"7-dcb195a59c23f1df8c30774dfa2cc910","contents":{"test":"Hello world!"},"tag":"TestDoc"}}',
-  lastEventId: '"7-g1AAAAB5eJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuRAY-iPBYgydAApP6D1GYwJ7LnAgXYDY0tLUwSk7DpywIA6hkmdA"',
-  origin: 'http://127.0.0.1:5984'
-}
