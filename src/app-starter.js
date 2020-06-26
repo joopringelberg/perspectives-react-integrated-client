@@ -47,7 +47,8 @@ function createWindow ()
   mainWindow = new BrowserWindow(
     {
       width: 1280,
-      height: 400,
+      // height: 400, // size for movie on 1280x800 screen.
+      height: 1000,
       webPreferences: {
         nodeIntegration: true
         // preload: './preload.js'
@@ -55,7 +56,10 @@ function createWindow ()
     });
 
   // mainWindow.loadURL("http://localhost:" + port + "/public/index.html");
-  mainWindow.loadURL("file://" + path.join(__dirname, "../public/index.html" ));
+  // If app-starter.js resides in /public:
+  mainWindow.loadURL("file://" + path.join(__dirname, "index.html" ));
+  // If app-starter.js resides in /src:
+  // mainWindow.loadURL("file://" + path.join(__dirname, "../public/index.html" ));
 
   // Open the DevTools.
   if (argv.devtools)

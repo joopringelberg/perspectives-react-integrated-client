@@ -5,4 +5,5 @@
 
 cp ./src/importModule.js ./public/importModule.js
 cp ./src/index.html ./public/index.html
+cp ./src/app-starter.js ./public/app-starter.js
 webpack

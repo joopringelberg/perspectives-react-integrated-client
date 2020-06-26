@@ -1,19 +1,37 @@
 {
-  "name": "perspectives-react-integrated-client",
-  "version": "0.3.0",
+  "name": "InPlace",
+  "version": "0.3.1",
   "description": "A client with the core built-in.",
   "private": true,
-  "main": "src/app-starter.js",
+  "main": "public/app-starter.js",
+  "homepage": "https://inplace.one",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "electron": "WEBPACK_DEVSERVER_PORT=5678 electron . -d=true",
     "serve": "WEBPACK_DEVSERVER_PORT=5678 webpack-dev-server --port 5678",
     "symlinks": "./createPerspectivesLinks.sh",
-    "build": "./build.sh"
+    "build": "./build.sh",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "release": "env GH_TOKEN=760ec1d242fad3605518357047ecb64b0e8804c5 build
   },
-  "author": "Joop Ringelberg",
-  "license": "ISC",
+  "author": "Joop Ringelberg <joop.ringelberg@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joopringelberg/perspectives-react-integrated-client.git"
+  },
+  "license": "GPL-3.0-or-later",
+  "build": {
+    "appId": "com.electron.InPlace",
+    "files": [
+      "public/**/*"
+    ],
+    "directories": {
+      "buildResources": "resources"
+    },
+    "publish": "github"
+  },
   "dependencies": {
     "@primer/octicons-react": "^9.0.0",
     "bootstrap": "^4.3.1",
@@ -34,14 +52,15 @@
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^2.1.1",
-    "electron": "^8.2.4",
+    "electron": "^9.0.5",
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.13.0",
     "html-webpack-plugin": "^3.2.0",
     "ignore-loader": "^0.1.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.4.1"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "electron-builder": "^22.7.0"
   }
 }

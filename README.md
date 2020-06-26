@@ -42,6 +42,8 @@ This client depends on:
 * `perspectives-react`
 * `perspectives-proxy`
 
+Furthermore, we use [electron-builder](https://www.electron.build/) to create a distributable file. However, this package requires a recent Node version. I found it works with v12.18.1.
+
 The latter module is not required by the App itself, but as an external dependency by both `perspectives-core` and `perspectives-react`. Hence it is listed as a dependency in `package.json`.
 
 ### System and user instances

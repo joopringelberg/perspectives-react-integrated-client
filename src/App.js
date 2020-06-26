@@ -2,7 +2,7 @@ import React, { Component } from "react";// 19
 import "./App.css";
 import { authenticate, resetAccount } from 'perspectives-core';
 
-import "./externals.js"
+import "./externals.js";
 
 import {
     Context,
