@@ -1,4 +1,4 @@
-"use strict"; //2
+"use strict"; //3
 
 const path = require("path");
 const electron = require("electron");
