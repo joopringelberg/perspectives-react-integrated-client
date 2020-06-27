@@ -1,6 +1,6 @@
 {
   "name": "InPlace",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "A client with the core built-in.",
   "private": true,
   "main": "public/app-starter.js",
@@ -14,7 +14,7 @@
     "build": "./build.sh",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "release": "GH_TOKEN=8ac3118799469ad545a5565cc3eeeac16c20fbb9 electron-builder build -p always"
+    "release": "release.sh"
   },
   "author": "Joop Ringelberg <joop.ringelberg@gmail.com>",
   "repository": {
