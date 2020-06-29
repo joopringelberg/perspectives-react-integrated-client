@@ -1,6 +1,6 @@
 {
   "name": "InPlace",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "A client with the core built-in.",
   "private": true,
   "main": "public/app-starter.js",
@@ -14,7 +14,7 @@
     "build": "./build.sh",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "release": "release.sh"
+    "release": "./release.sh"
   },
   "author": "Joop Ringelberg <joop.ringelberg@gmail.com>",
   "repository": {
@@ -35,6 +35,7 @@
   "dependencies": {
     "@primer/octicons-react": "^9.0.0",
     "bootstrap": "^4.3.1",
+    "electron-log": "^4.2.2",
     "electron-updater": "^4.3.1",
     "perspectives-core": "https://github.com/joopringelberg/perspectives-core.git#v0.5.0",
     "perspectives-proxy": "git+https://github.com/joopringelberg/perspectives-proxy.git#v1.4.0",

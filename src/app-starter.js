@@ -4,8 +4,8 @@ const path = require("path");
 const electron = require("electron");
 const { ipcMain } = require('electron');
 const { app, protocol } = require('electron');
-const {autoUpdater} = require("electron-updater");
 const yargs = require('yargs');
+const runAutoUpdater = require("./autoUpdate.js").runAutoUpdater;
 
 // Module to control application life.
 // const app = electron.app;
@@ -47,9 +47,15 @@ function createWindow ()
   // mainWindow = new BrowserWindow({width: 800, height: 600})
   mainWindow = new BrowserWindow(
     {
-      width: 1280,
-      // height: 400, // size for movie on 1280x800 screen.
-      height: 1000,
+      // size for movie on 1280x800 screen.
+      // width: 1280,
+      // height: 400,
+
+      // For debugging auto-update (positioning window left from version window).
+      width: 600,
+      height: 600,
+      x: 10,
+      y: 0,
       webPreferences: {
         nodeIntegration: true
         // preload: './preload.js'
@@ -86,20 +92,13 @@ function createWindow ()
   })
 }
 
-//-------------------------------------------------------------------
-// Auto updates - Option 1 - Simplest version (from: https://github.com/iffy/electron-updater-example/blob/master/main.js)
-//
-// This will immediately download an update, then install when the
-// app quits.
-//-------------------------------------------------------------------
-app.on('ready', function()  {
-  autoUpdater.checkForUpdatesAndNotify();
-});
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", createWindow);
+
+// Run the auto updater.
+runAutoUpdater();
 
 // Quit when all windows are closed.
 app.on("window-all-closed", function ()

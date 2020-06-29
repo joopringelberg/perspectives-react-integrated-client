@@ -6,4 +6,7 @@
 cp ./src/importModule.js ./public/importModule.js
 cp ./src/index.html ./public/index.html
 cp ./src/app-starter.js ./public/app-starter.js
+cp ./src/autoUpdate.js ./public/autoUpdate.js
+cp ./src/version.html ./public/version.html
+cp ./src/version.js ./public/version.js
 webpack
