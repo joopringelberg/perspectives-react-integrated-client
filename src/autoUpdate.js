@@ -102,9 +102,9 @@ function runAutoUpdater()
     sendStatusToWindow('Update downloaded');
   });
   app.on('ready', function() {
-    // Create the Menu
-    const menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
+    // Create the Menu, but not during development.
+    // const menu = Menu.buildFromTemplate(template);
+    // Menu.setApplicationMenu(menu);
 
     // We don't open the extra window.
     // createDefaultWindow();

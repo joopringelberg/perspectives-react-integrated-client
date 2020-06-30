@@ -9,4 +9,5 @@ cp ./src/app-starter.js ./public/app-starter.js
 cp ./src/autoUpdate.js ./public/autoUpdate.js
 cp ./src/version.html ./public/version.html
 cp ./src/version.js ./public/version.js
+cp ./src/couchdbconfig.js ./public/couchdbconfig.js
 webpack

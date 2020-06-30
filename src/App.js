@@ -41,10 +41,13 @@ class App extends Component
   {
     super(props);
     const component = this;
+    const urlParams = new URLSearchParams(window.location.search);
     this.state =
       { notLoggedIn:  true
       , username: ""
       , password: ""
+      , host: urlParams.get("host")
+      , port: isNaN( parseInt ( urlParams.get("port") ) ) ? 5984 : parseInt ( urlParams.get("port") )
       , authenticationFeedback: undefined
       , resetAccount: false
       , setusername: function(usr)
@@ -57,31 +60,43 @@ class App extends Component
         }
       , authenticate: function()
         {
-          authenticate(component.state.username)(component.state.password)
-            (function(n)
-            {
-              return function()
+          if (component.state.resetAccount)
+          {
+            resetAccount(component.state.username)(component.state.password)(component.state.host)(component.state.port)
+              (function(success)
               {
-                switch (n) {
-                  // UnknownUser
-                  case 0:
-                    component.setState({authenticationFeedback: "This user is unknown."})
-                    break;
-                  // WrongPassword
-                  case 1:
-                    component.setState({authenticationFeedback: "This password is wrong."})
-                    break;
-                  // OK
-                  case 2:
-                    component.setState({notLoggedIn: false})
-                    if (component.state.resetAccount)
-                    {
-                      resetAccount(component.state.username)(component.state.password)();
-                    }
-                    break;
+                if (!success)
+                {
+                  alert("Unfortunately your account could not be reset and may be in an undefined state. You can reset by hand by opening Fauxton and removing all three databases whose name starts with your username.")
+                }
+                window.location.reload();                
+              })();
+
+          }
+          else
+          {
+            authenticate(component.state.username)(component.state.password)(component.state.host)(component.state.port)
+              (function(n)
+              {
+                return function()
+                {
+                  switch (n) {
+                    // UnknownUser
+                    case 0:
+                      component.setState({authenticationFeedback: "This user is unknown."})
+                      break;
+                    // WrongPassword
+                    case 1:
+                      component.setState({authenticationFeedback: "This password is wrong."})
+                      break;
+                    // OK
+                    case 2:
+                      component.setState({notLoggedIn: false})
+                      break;
+                }
               }
-            }
-            })();
+              })();
+          }
          }
        };
   }

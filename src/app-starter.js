@@ -6,6 +6,7 @@ const { ipcMain } = require('electron');
 const { app, protocol } = require('electron');
 const yargs = require('yargs');
 const runAutoUpdater = require("./autoUpdate.js").runAutoUpdater;
+const { couchdbHost, couchdbPort } = require("./couchdbconfig.js");
 
 // Module to control application life.
 // const app = electron.app;
@@ -48,11 +49,11 @@ function createWindow ()
   mainWindow = new BrowserWindow(
     {
       // size for movie on 1280x800 screen.
-      // width: 1280,
+      width: 1280,
       // height: 400,
 
       // For debugging auto-update (positioning window left from version window).
-      width: 600,
+      // width: 600,
       height: 600,
       x: 10,
       y: 0,
@@ -64,7 +65,7 @@ function createWindow ()
 
   // mainWindow.loadURL("http://localhost:" + port + "/public/index.html");
   // If app-starter.js resides in /public:
-  mainWindow.loadURL("file://" + path.join(__dirname, "index.html" ));
+  mainWindow.loadURL("file://" + path.join(__dirname, "index.html?host=" + couchdbHost + "&port=" + couchdbPort  ));
   // If app-starter.js resides in /src:
   // mainWindow.loadURL("file://" + path.join(__dirname, "../public/index.html" ));
 
