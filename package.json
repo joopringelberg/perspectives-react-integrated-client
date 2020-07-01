@@ -1,6 +1,6 @@
 {
   "name": "InPlace",
-  "version": "0.3.5",
+  "version": "0.3.8",
   "description": "A client with the core built-in.",
   "private": true,
   "main": "public/app-starter.js",
