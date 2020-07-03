@@ -49,7 +49,7 @@ class App extends Component
       { notLoggedIn:  true
       , username: ""
       , password: ""
-      , host: urlParams.get("host")
+      , host: atob( urlParams.get("host") )
       , port: isNaN( parseInt ( urlParams.get("port") ) ) ? 5984 : parseInt ( urlParams.get("port") )
       , authenticationFeedback: undefined
       , resetAccount: false

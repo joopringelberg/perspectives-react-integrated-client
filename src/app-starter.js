@@ -8,6 +8,8 @@ const yargs = require('yargs');
 const runAutoUpdater = require("./autoUpdate.js").runAutoUpdater;
 const { couchdbHost, couchdbPort } = require("./couchdbconfig.js");
 
+var btoa = require('btoa');
+
 // Module to control application life.
 // const app = electron.app;
 // Module to create native browser window.
@@ -67,7 +69,7 @@ function createWindow ()
 
   // mainWindow.loadURL("http://localhost:" + port + "/public/index.html");
   // If app-starter.js resides in /public:
-  mainWindow.loadURL("file://" + path.join(__dirname, "index.html?host=" + couchdbHost + "&port=" + couchdbPort  ));
+  mainWindow.loadURL("file://" + path.join(__dirname, "index.html?host=" + btoa( couchdbHost ) + "&port=" + couchdbPort  ));
   // If app-starter.js resides in /src:
   // mainWindow.loadURL("file://" + path.join(__dirname, "../public/index.html" ));
 
