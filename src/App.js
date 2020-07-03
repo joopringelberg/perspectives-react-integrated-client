@@ -2,7 +2,7 @@ import React, { Component } from "react";// 19
 import "./App.css";
 import { authenticate, resetAccount } from 'perspectives-core';
 
-const { shell } = require('electron')
+const { shell, ipcRenderer } = require('electron');
 
 import "./externals.js";
 
@@ -88,11 +88,11 @@ class App extends Component
                   switch (n) {
                     // UnknownUser
                     case 0:
-                      component.setState({authenticationFeedback: "This user is unknown."})
+                      component.setState({authenticationFeedback: "This combination of username and password is unknown."})
                       break;
                     // WrongPassword
                     case 1:
-                      component.setState({authenticationFeedback: "This password is wrong."})
+                      component.setState({authenticationFeedback: "Detected a valid Couchdb System Admin who is not yet an InPlace user. However, an error occurred on creating a new InPlace account!"})
                       break;
                     // OK
                     case 2:
@@ -116,16 +116,25 @@ class App extends Component
       {
         component.setState( {couchdbInstalled: true} );
       } } );
-    // Find out if a user has been configured. In other words, if the db is in partymode.
+    // Find out if a user has been configured. In other words, if the db is in partymode. Any account information would do. The localusers database is not public.
     headers.append('Authorization', "Basic " + btoa( 'authenticator:secret' ) );
-    fetch(component.state.host + ":" + component.state.port + "/localusers/_all_docs", {method:'GET', headers: headers })
+    fetch(component.state.host + ":" + component.state.port + "/localusers/_all_docs", {method:'GET' })
       .then(function(response)
         {
-          if (response.ok)
+          if (response.status == 401 || response.status == 200)
           {
-            component.setState( {usersConfigured: true} );
+            component.setState( {usersConfigured: true } );
           }
         });
+    ipcRenderer.on('quit', function(event, text)
+      {
+        fetch( component.state.host + ":" + component.state.port + "/_session", { method: 'delete' } ).then(function(response) {
+          if (response.ok)
+          {
+            // Now shut down, with an asynchronous message.
+            ipcRenderer.send('sessionTerminated', "sessionTerminated");
+          } } );
+      });
   }
 
   render ()

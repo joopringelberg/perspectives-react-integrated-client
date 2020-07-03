@@ -2,7 +2,7 @@
 
 const path = require("path");
 const electron = require("electron");
-const { ipcMain } = require('electron');
+const { ipcMain, net } = require('electron');
 const { app, protocol } = require('electron');
 const yargs = require('yargs');
 const runAutoUpdater = require("./autoUpdate.js").runAutoUpdater;
@@ -15,6 +15,8 @@ const BrowserWindow = electron.BrowserWindow;
 
 // The default port is 3456. Configure a port by providing the environment variable WEBPACK_DEVSERVER_PORT with a value.
 const port = process.env.WEBPACK_DEVSERVER_PORT || 5678;
+
+let sessionCookieDeleted = false;
 
 ////////////////////////////////////////////////////////////////////////////////
 //// COMMAND LINE ARGUMENTS
@@ -75,6 +77,17 @@ function createWindow ()
     mainWindow.webContents.openDevTools();
   }
 
+  mainWindow.on('close', function(event)
+    {
+      if (!sessionCookieDeleted)
+      {
+        // Stop shutting down.
+        event.preventDefault();
+        // Sends an asynchronous message to the webpage to delete the session cookie.
+        mainWindow.webContents.send('quit', "quit");
+      }
+    })
+
   // Emitted when the window is closed.
   mainWindow.on("closed", function ()
   {
@@ -101,16 +114,22 @@ app.on("ready", createWindow);
 // Run the auto updater.
 runAutoUpdater();
 
-// Quit when all windows are closed.
-app.on("window-all-closed", function ()
-{
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== "darwin")
+app.on('before-quit', (event) => {
+  if (!sessionCookieDeleted)
   {
-    app.quit();
+    // Stop shutting down.
+    event.preventDefault();
+    // Sends an asynchronous message to the webpage to delete the session cookie.
+    mainWindow.webContents.send('quit', "quit");
   }
-});
+})
+
+// Once the webpage has deleted the session cookie, shut down.
+ipcMain.on('sessionTerminated', function()
+  {
+    sessionCookieDeleted = true;
+    app.quit();
+  });
 
 app.on("activate", function ()
 {
