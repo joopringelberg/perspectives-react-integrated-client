@@ -128,12 +128,17 @@ class App extends Component
         });
     ipcRenderer.on('quit', function(event, text)
       {
-        fetch( component.state.host + ":" + component.state.port + "/_session", { method: 'delete' } ).then(function(response) {
-          if (response.ok)
-          {
-            // Now shut down, with an asynchronous message.
-            ipcRenderer.send('sessionTerminated', "sessionTerminated");
-          } } );
+        fetch( component.state.host + ":" + component.state.port + "/_session", { method: 'delete' } )
+          .then(function(response) {
+            if (response.ok)
+            {
+              // Now shut down, with an asynchronous message.
+              ipcRenderer.send('sessionTerminated', "sessionTerminated");
+            } } )
+          .finally(function()
+            {
+              ipcRenderer.send('sessionTerminated', "sessionTerminated");
+            });
       });
   }
 
