@@ -1,6 +1,6 @@
 {
   "name": "InPlace",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "A client with the core built-in.",
   "private": true,
   "main": "public/app-starter.js",
@@ -38,7 +38,7 @@
     "btoa": "^1.2.1",
     "electron-log": "^4.2.2",
     "electron-updater": "^4.3.1",
-    "perspectives-core": "git+https://github.com/joopringelberg/perspectives-core.git#v0.5.5",
+    "perspectives-core": "git+https://github.com/joopringelberg/perspectives-core.git#v0.5.6",
     "perspectives-proxy": "git+https://github.com/joopringelberg/perspectives-proxy.git#v1.4.0",
     "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git#v0.5.1",
     "react": "^16.8.6",
