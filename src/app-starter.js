@@ -99,11 +99,12 @@ function createWindow ()
     mainWindow = null;
   });
 
+  console.log("Path to icon = " + path.join(__dirname, "file.png"));
   // Handle dragging a file out to the file system.
   ipcMain.on('ondragstart', (event, filePath) => {
     event.sender.startDrag(
-      { file: filePath
-      , icon: process.cwd() + '/public/file.png'
+      { file: filePath, icon: path.join(__dirname, "file.png")
+      // , icon: process.cwd() + '/public/file.png'
     })
   })
 }

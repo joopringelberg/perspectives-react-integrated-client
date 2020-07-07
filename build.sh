@@ -10,4 +10,5 @@ cp ./src/autoUpdate.js ./public/autoUpdate.js
 cp ./src/version.html ./public/version.html
 cp ./src/version.js ./public/version.js
 cp ./src/couchdbconfig.js ./public/couchdbconfig.js
+cp ./src/file.png ./public/file.png
 webpack
