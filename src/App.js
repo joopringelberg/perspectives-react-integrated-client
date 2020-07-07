@@ -109,7 +109,6 @@ class App extends Component
   componentDidMount ()
   {
     const component = this;
-    const headers = new Headers();
     // look up the base url of Couchdb and set couchdbInstalled to true if found.
     fetch( component.state.host + ":" + component.state.port ).then(function(response) {
       if (response.ok)
@@ -117,12 +116,12 @@ class App extends Component
         component.setState( {couchdbInstalled: true} );
       } } );
     // Find out if a user has been configured. In other words, if the db is in partymode. Any account information would do. The localusers database is not public.
-    headers.append('Authorization', "Basic " + btoa( 'authenticator:secret' ) );
-    fetch(component.state.host + ":" + component.state.port + "/localusers/_all_docs", {method:'GET' })
+    fetch(component.state.host + ":" + component.state.port + "/localusers", {method:'GET' })
       .then(function(response)
         {
           if (response.status == 401 || response.status == 200)
           {
+            // Database exists and cannot be accessed without authentication with an authorized account (check for 200 is just in case).
             component.setState( {usersConfigured: true } );
           }
         });
@@ -150,8 +149,15 @@ class App extends Component
       return <Card>
               <Card.Header as="h5">Welcome to InPlace</Card.Header>
               <Card.Body>
-                <Card.Text>You can create an account by entering a username (consisting of lowercase characters or digits only, no spaces) and a password. Remember the password well: you cannot look it up later!</Card.Text>
-                <Card.Text>Your InPlace account is a Couchdb system administration account, too. You can use it to open the Fauxton admin interface.</Card.Text>
+                <Card.Text>There is no user of this InPlace installation yet. Enter the username and password you've used to create a Server Admin in Couchdb. If you have not done that yet, follow these instructions:</Card.Text>
+                <ol>
+                  <li>Go to the <a href="" onClick={function() {shell.openExternal('http://127.0.0.1:5984/_utils')}}>Fauxton admin interface</a>.</li>
+                  <li>Enter "admin" for username and the password you've set on installing Couchdb.</li>
+                  <li>Click the lowest button in the left column, select the "Create Server Admin" tab. </li>
+                  <li>Enter the name you will use to open InPlace. Enter a password.</li>
+                  <li>Click "Create Admin".</li>
+                  <li>Finally close InPlace (this program) and open it again.</li>
+                </ol>
               </Card.Body>
             </Card>
     }
@@ -167,7 +173,7 @@ class App extends Component
                 </header>
               </Row>
               <Row className="pb-3">
-                {component.state.usersConfigured ? <p>Enter your name and password:</p> : <Welcome/>}
+                {component.state.usersConfigured ? <p>Enter the username and password for an InPlace user on this computer. Alternatively, to create a new InPlace user, enter a valid combination of username and password of a Couchdb Server Admin.</p> : <Welcome/>}
               </Row>
               <Row>
                 <Form>
@@ -286,12 +292,21 @@ class App extends Component
               <li>Couchdb is running, but not on the default port 5984. Currently it is not possible to configure the port Perspectives uses to access Couchdb. Try to make Couchdb listen on port 5984.</li>
             </ol>
             <Card.Title>How to install Coudchb</Card.Title>
-            <Card.Text>Just download, install, start and verify Couchdb. Do not follow the instructions in Couchdb documentation to set up your installation: InPlace will do it for you.</Card.Text>
+            <Card.Text>Just download, install, start and verify Couchdb. You need not follow instructions in the Couchdb documents. Just perform the steps below.</Card.Text>
             <ol variant="flush">
-              <li>Download Couchb version 2.3.1 from <a href="" onClick={function() {shell.openExternal('https://couchdb.apache.org/#download')}}>Couchdb</a>. PLEASE NOTE that a newer version of Couchdb is available, but Perspectives currently relies on version 2.3.1!</li>
-              <li>Run Couchdb. This will open up a page in your webbrowser: this is the Fauxton admin interface. If this does not happen, <a href="" onClick={function() {shell.openExternal('http://127.0.0.1:5984/_utils')}}>click here</a>.</li>
-              <li>Verify the install by clicking on Verify, then Verify Installation.</li>
-              <li>Close InPlace (this application) and start it again.</li>
+              <li>Download Couchb version 3.1.0 from <a href="" onClick={function() {shell.openExternal('https://couchdb.apache.org/#download')}}>Couchdb</a>.</li>
+              <li>Run Couchdb. An small dialog will appear stating: "Nou CouchDB Admin password found". Enter a password and remember it well!</li>
+              <li>This will open up a page in your webbrowser: this is the Fauxton admin interface. If this does not happen, click <a href="" onClick={function() {shell.openExternal('http://127.0.0.1:5984/_utils')}}>here</a>.</li>
+              <li>Enter "admin" for username and the password you've just set.</li>
+              <li>Verify the install by clicking on the Verify button in the left column (the button with the checkmark), then click the button "Verify Installation".</li>
+              <li>Create a new System Admin.
+                <ol>
+                  <li>Click the lowest button in the left column, select the "Create Server Admin" tab.</li>
+                  <li>Enter the name you will use to open InPlace. Enter a password.</li>
+                  <li>Click "Create Admin".</li>
+                </ol>
+              </li>
+              <li>Close InPlace (this application) and start it again. Then enter the username and password you've just added to Couchdb.</li>
             </ol>
           </Card.Body>
         </Card>)
