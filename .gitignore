@@ -6,3 +6,4 @@ public
 dist
 temp
 test*.json
+release.sh
