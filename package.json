@@ -1,6 +1,6 @@
 {
   "name": "InPlace",
-  "version": "0.3.11",
+  "version": "0.4.0",
   "description": "A client with the core built-in.",
   "private": true,
   "main": "public/app-starter.js",
@@ -30,7 +30,9 @@
     "directories": {
       "buildResources": "resources"
     },
-    "publish": "github"
+    "publish": "github",
+    "mac": { "target" = "default"},
+    "linux": { "target" = "AppImage" }
   },
   "dependencies": {
     "@primer/octicons-react": "^9.0.0",
@@ -38,9 +40,9 @@
     "btoa": "^1.2.1",
     "electron-log": "^4.2.2",
     "electron-updater": "^4.3.1",
-    "perspectives-core": "git+https://github.com/joopringelberg/perspectives-core.git#v0.5.7",
+    "perspectives-core": "git+https://github.com/joopringelberg/perspectives-core.git#v0.6.0",
     "perspectives-proxy": "git+https://github.com/joopringelberg/perspectives-proxy.git#v1.4.0",
-    "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git#v0.5.1",
+    "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git#v0.6.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
