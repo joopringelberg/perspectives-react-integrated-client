@@ -1,0 +1,5 @@
+
+WD="$(dirname "$0")"
+curl -u admin:admin -X PUT http://127.0.0.1:5984/_replicator/replicateRepositoryToCor -d '{ "_id": "replicateRepositoryToCor", "user_ctx": { "name": "admin", "roles": [ "_admin", "_reader", "_writer" ] }, "source": { "url": "http://www.joopringelberg.nl/cdb/repository", "headers": { "Authorization": "Basic YWRtaW46YWRtaW4=" } }, "target": { "url": "http://127.0.0.1:5984/cor_models", "headers": { "Authorization": "Basic YWRtaW46YWRtaW4=" } }, "create_target": false, "continuous": true, "owner": "admin"}'
+
+curl -u admin:admin -X PUT http://127.0.0.1:5984/_replicator/replicateRepositoryToJoop -d '{  "_id": "replicateRepositoryToJoop",  "user_ctx": {  "name": "admin",  "roles": [  "_admin",  "_reader",  "_writer"  ]  },  "source": {  "url": "http://www.joopringelberg.nl/cdb/repository",  "headers": {  "Authorization": "Basic YWRtaW46YWRtaW4="  }  },  "target": {  "url": "http://127.0.0.1:5984/joop_models",  "headers": {  "Authorization": "Basic YWRtaW46YWRtaW4="  }  },  "create_target": false,  "continuous": true,  "owner": "admin" }'
