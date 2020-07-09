@@ -7,8 +7,10 @@ const { app, protocol } = require('electron');
 const yargs = require('yargs');
 const runAutoUpdater = require("./autoUpdate.js").runAutoUpdater;
 const { couchdbHost, couchdbPort } = require("./couchdbconfig.js");
-
+const fs = require('fs').promises;
 var btoa = require('btoa');
+
+const invitationFilePath = path.join(__dirname, "invitation.json");
 
 // Module to control application life.
 // const app = electron.app;
@@ -99,14 +101,16 @@ function createWindow ()
     mainWindow = null;
   });
 
-  console.log("Path to icon = " + path.join(__dirname, "file.png"));
-  // Handle dragging a file out to the file system.
+  ipcMain.handle('createfile', async (event, text) => {
+  	const file = await fs.readFile(invitationFilePath, 'utf8');
+  	return await fs.writeFile(invitationFilePath, text).then( () => invitationFilePath);
+  })
+
   ipcMain.on('ondragstart', (event, filePath) => {
     event.sender.startDrag(
-      { file: filePath, icon: path.join(__dirname, "file.png")
-      // , icon: process.cwd() + '/public/file.png'
-    })
-  })
+      { file: filePath, icon: path.join(__dirname, "file.png") });
+    });
+
 }
 
 // This method will be called when Electron has finished

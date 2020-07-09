@@ -31,8 +31,8 @@
       "buildResources": "resources"
     },
     "publish": "github",
-    "mac": { "target" = "default"},
-    "linux": { "target" = "AppImage" }
+    "mac": { "target": "default"},
+    "linux": { "target": "AppImage" }
   },
   "dependencies": {
     "@primer/octicons-react": "^9.0.0",
