@@ -10,8 +10,8 @@ const { couchdbHost, couchdbPort } = require("./couchdbconfig.js");
 const fs = require('fs').promises;
 var btoa = require('btoa');
 
-const invitationFilePath = path.join(app.getPath("documents"), "invitation.json");
-console.log("Path to invitation = " + invitationFilePath );
+const invitationFilePath = path.join(app.getPath("downloads"), "invitation.json");
+// console.log("Path to invitation = " + invitationFilePath );
 
 // Module to control application life.
 // const app = electron.app;
@@ -102,14 +102,21 @@ function createWindow ()
     mainWindow = null;
   });
 
-  ipcMain.handle('createfile', async (event, text) => {
-  	return await fs.writeFile(invitationFilePath, text, {mode: 0o666, flag: "w"}).then( () => invitationFilePath);
-  })
+  // ipcMain.handle('createfile', async (event, text) => {
+  // 	return await fs.writeFile(invitationFilePath, text, {mode: 0o666, flag: "w"}).then( () => invitationFilePath);
+  // })
+  //
+  // ipcMain.on('ondragstart', (event, filePath) => {
+  //   event.sender.startDrag(
+  //     { file: filePath, icon: path.join(__dirname, "file.png") });
+  //   });
+
+  ipcMain.on('invitationpath', (event) => { event.returnValue = invitationFilePath});
 
   ipcMain.on('ondragstart', (event, filePath) => {
     event.sender.startDrag(
-      { file: filePath, icon: path.join(__dirname, "file.png") });
-    });
+      { file: filePath, icon: path.join(__dirname, "file.png")});
+    })
 
 }
 
