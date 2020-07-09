@@ -10,7 +10,8 @@ const { couchdbHost, couchdbPort } = require("./couchdbconfig.js");
 const fs = require('fs').promises;
 var btoa = require('btoa');
 
-const invitationFilePath = path.join(__dirname, "invitation.json");
+const invitationFilePath = path.join(app.getPath("documents"), "invitation.json");
+console.log("Path to invitation = " + invitationFilePath );
 
 // Module to control application life.
 // const app = electron.app;
@@ -102,8 +103,7 @@ function createWindow ()
   });
 
   ipcMain.handle('createfile', async (event, text) => {
-  	const file = await fs.readFile(invitationFilePath, 'utf8');
-  	return await fs.writeFile(invitationFilePath, text).then( () => invitationFilePath);
+  	return await fs.writeFile(invitationFilePath, text, {mode: 0o666, flag: "w"}).then( () => invitationFilePath);
   })
 
   ipcMain.on('ondragstart', (event, filePath) => {
