@@ -6,7 +6,6 @@
   "main": "public/app-starter.js",
   "homepage": "https://inplace.one",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "electron": "WEBPACK_DEVSERVER_PORT=5678 electron . -d=true",
     "serve": "WEBPACK_DEVSERVER_PORT=5678 webpack-dev-server --port 5678",
@@ -25,11 +24,8 @@
   "build": {
     "appId": "com.electron.InPlace",
     "files": [
-      "public/**/*"
+      "public/"
     ],
-    "directories": {
-      "buildResources": "resources"
-    },
     "publish": "github",
     "mac": { "target": "default"},
     "linux": { "target": "AppImage" }
