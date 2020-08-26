@@ -1,4 +1,4 @@
-import React, { Component } from "react";// 19
+import React, { Component } from "react";// 26
 import "./App.css";
 import { authenticate, resetAccount } from 'perspectives-core';
 
@@ -9,15 +9,20 @@ import "./externals.js";
 import {
     Context,
     Rol,
+    RoleInstances,
     PSRol,
+    PSRoleInstances,
     PSView,
+    AppContext,
     RolBinding,
-    ExternalViewOfBoundContext,
+    View,
     getModelName,
     Screen,
     RemoveRol,
     importContexts,
-    MySystem} from "perspectives-react";
+    MySystem,
+    RoleInstanceIterator
+  } from "perspectives-react";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -31,8 +36,10 @@ import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
-import Octicon, {Trashcan, CloudDownload} from '@primer/octicons-react'
+import {TrashcanIcon, DesktopDownloadIcon} from '@primer/octicons-react'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -55,6 +62,11 @@ class App extends Component
       , resetAccount: false
       , couchdbInstalled: false
       , usersConfigured: false
+      , selectedCard: undefined
+      , selectedRole: undefined
+      , positionToMoveTo: undefined
+      , setSelectedCard: (c, roleId) => this.setState({selectedCard: c, selectedRole: roleId})
+      , setPositionToMoveTo: (pos) => this.setState({positionToMoveTo: pos})
       , setusername: function(usr)
         {
           component.setState({username: usr, authenticationFeedback: undefined});
@@ -104,6 +116,8 @@ class App extends Component
           }
          }
        };
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.context_ = {setSelectedCard: this.state.setSelectedCard};
   }
 
   componentDidMount ()
@@ -141,27 +155,20 @@ class App extends Component
       });
   }
 
+  handleKeyDown(event)
+  {
+    switch(event.keyCode)
+    {
+      case 27: // Escape
+        this.setState({selectedCard: undefined, selectedRole: undefined});
+        event.preventDefault();
+        break;
+    }
+  }
+
   render ()
   {
     const component = this;
-
-    function Welcome(){
-      return <Card>
-              <Card.Header as="h5">Welcome to InPlace</Card.Header>
-              <Card.Body>
-                <Card.Text>There is no user of this InPlace installation yet. Enter the username and password you've used to create a Server Admin in Couchdb. If you have not done that yet, follow these instructions:</Card.Text>
-                <ol>
-                  <li>Go to the <a href="" onClick={function() {shell.openExternal('http://127.0.0.1:5984/_utils')}}>Fauxton admin interface</a>.</li>
-                  <li>Enter "admin" for username and the password you've set on installing Couchdb.</li>
-                  <li>Click the lowest button in the left column, select the "Create Server Admin" tab. </li>
-                  <li>Enter the name you will use to open InPlace. Enter a password.</li>
-                  <li>Click "Create Admin".</li>
-                  <li>Finally close InPlace (this program) and open it again.</li>
-                </ol>
-              </Card.Body>
-            </Card>
-    }
-
     if (component.state.couchdbInstalled)
     {
         if (component.state.notLoggedIn)
@@ -183,8 +190,9 @@ class App extends Component
                     </Col>
                     <Col sm="8">
                       <Form.Control
-                      placeholder="Username" aria-label="Username" onBlur={e => component.state.setusername(e.target.value)} autoFocus/>
+                      placeholder="Username" aria-describedby="usernameDescription" aria-label="Username" onBlur={e => component.state.setusername(e.target.value)} autoFocus/>
                     </Col>
+                    <p id="usernameDescription" aria-hidden="true" hidden>Enter your self-chosen username here</p>
                   </Form.Group>
                   <Form.Group as={Row} controlId="password">
                     <Form.Label column sm="4">Password:</Form.Label>
@@ -219,62 +227,12 @@ class App extends Component
         else
         {
           return (
-            <Container>
-              <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">InPlace</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Container>
-                    <Row>
-                      <Col/>
-                      <Col lg={1}>
-                        <Download/>
-                      </Col>
-                      <Col lg={1}>
-                        <RemoveRol>
-                          <Trash/>
-                        </RemoveRol>
-                      </Col>
-                    </Row>
-                    </Container>
-                </Navbar.Collapse>
-              </Navbar>
-              <div>
-                <MySystem>
-                  <Tab.Container id="left-tabs-example" defaultActiveKey="first" mountOnEnter={true}>
-                    <Row className="align-items-stretch">
-                      <Col lg={3} className="App-border-right">
-                        <Nav variant="pills" className="flex-column">
-                          <Rol rol="IndexedContexts">
-                            <ExternalViewOfBoundContext viewname="allProperties">
-                              <PSView.Consumer>
-                                {value => <Nav.Item>
-                                    <Nav.Link eventKey={value.rolinstance}>{value.propval("Name")}</Nav.Link>
-                                  </Nav.Item>}
-                              </PSView.Consumer>
-                            </ExternalViewOfBoundContext>
-                          </Rol>
-                        </Nav>
-                      </Col>
-                      <Col lg={9}>
-                        <Tab.Content>
-                          <Rol rol="IndexedContexts">
-                            <RolBinding>
-                              <PSRol.Consumer>
-                                {value => <Tab.Pane eventKey={value.rolinstance}>
-                                    <Screen rolinstance={value.rolinstance}/>
-                                  </Tab.Pane>
-                                }
-                              </PSRol.Consumer>
-                            </RolBinding>
-                          </Rol>
-                        </Tab.Content>
-                      </Col>
-                    </Row>
-                  </Tab.Container>
-                </MySystem>
-              </div>
-            </Container>
+            <div onKeyDown={component.handleKeyDown}>
+              <CardClipBoard card={component.state.selectedCard} positiontomoveto={component.state.positionToMoveTo}/>
+              <AppContext.Provider value={component.state}>
+                <AppSwitcher/>
+              </AppContext.Provider>
+            </div>
           );
         }
     }
@@ -314,24 +272,255 @@ class App extends Component
   }
 }
 
+// AppSwitcher should not update: it renders just once.
+class AppSwitcher extends React.PureComponent
+{
+  render ()
+  {
+    return  <Container>
+              <Navbar bg="light" expand="lg" aria-label="Main menu bar">
+                <Navbar.Brand href="#home">InPlace</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Container>
+                    <Row>
+                      <Col/>
+                      <Col lg={1}>
+                        <Download/>
+                      </Col>
+                      <Col lg={1}>
+                        <RemoveRol>
+                          <Trash/>
+                        </RemoveRol>
+                      </Col>
+                    </Row>
+                    </Container>
+                </Navbar.Collapse>
+              </Navbar>
+              <MySystem>
+                <AppListTabContainer rol="IndexedContexts">
+                  <Row className="align-items-stretch">
+                    <Col lg={3} className="App-border-right">
+                      <Nav variant="pills" className="flex-column" aria-label="Apps">
+                        <RoleInstanceIterator>
+                          <View viewname="allProperties">
+                            <PSView.Consumer>
+                              {roleinstance => <Nav.Item>
+                                  <Nav.Link eventKey={roleinstance.rolinstance}>{roleinstance.propval("Name")}</Nav.Link>
+                                </Nav.Item>}
+                            </PSView.Consumer>
+                          </View>
+                        </RoleInstanceIterator>
+                      </Nav>
+                    </Col>
+                    <Col lg={9}>
+                      <Tab.Content>
+                        <RoleInstanceIterator>
+                          <PSRol.Consumer>{ roleinstance =>
+                            <Tab.Pane eventKey={roleinstance.rolinstance}>
+                              <RolBinding>
+                                <PSRol.Consumer>
+                                  { binding => <Screen rolinstance={binding.rolinstance}/> }
+                                </PSRol.Consumer>
+                              </RolBinding>
+                            </Tab.Pane>}
+                          </PSRol.Consumer>
+                        </RoleInstanceIterator>
+                      </Tab.Content>
+                    </Col>
+                  </Row>
+                </AppListTabContainer>
+              </MySystem>
+            </Container>
+
+  }
+}
+
+function Welcome(){
+  return <Card>
+          <Card.Header as="h5">Welcome to InPlace</Card.Header>
+          <Card.Body>
+            <Card.Text>There is no user of this InPlace installation yet. Enter the username and password you've used to create a Server Admin in Couchdb. If you have not done that yet, follow these instructions:</Card.Text>
+            <ol>
+              <li>Go to the <a href="" onClick={function() {shell.openExternal('http://127.0.0.1:5984/_utils')}}>Fauxton admin interface</a>.</li>
+              <li>Enter "admin" for username and the password you've set on installing Couchdb.</li>
+              <li>Click the lowest button in the left column, select the "Create Server Admin" tab. </li>
+              <li>Enter the name you will use to open InPlace. Enter a password.</li>
+              <li>Click "Create Admin".</li>
+              <li>Finally close InPlace (this program) and open it again.</li>
+            </ol>
+          </Card.Body>
+        </Card>
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// APPLISTTABCONTAINER
+////////////////////////////////////////////////////////////////////////////////
+function AppListTabContainer (props)
+{
+  class AppListTabContainer_ extends React.PureComponent
+  {
+    constructor(props)
+    {
+      super(props)
+      this.state={};
+    }
+    componentDidMount()
+    {
+      if (this.context.instances[0])
+      {
+        this.setState({ firstApp: this.context.instances[0] });
+      }
+    }
+
+    componentDidUpdate()
+    {
+      if (this.context.instances[0])
+      {
+        this.setState({ firstApp: this.context.instances[0] });
+      }
+    }
+
+    render ()
+    {
+      if (this.state.firstApp)
+      {
+        return  <Tab.Container id="apps" mountOnEnter={true} unmountOnExit={true} defaultActiveKey={this.state.firstApp}>
+                  {this.props.children}
+                </Tab.Container>
+      }
+      else {
+        return <div/>
+      }
+    }
+  }
+  AppListTabContainer_.contextType = PSRoleInstances;
+
+  return (<RoleInstances rol={props.rol}>
+      <AppListTabContainer_>{ props.children }</AppListTabContainer_>
+    </RoleInstances>)
+}
+
+AppListTabContainer.propTypes = { "rol": PropTypes.string.isRequired };
+
+////////////////////////////////////////////////////////////////////////////////
+// CARDCLIPBOARD
+////////////////////////////////////////////////////////////////////////////////
+class CardClipBoard extends React.PureComponent
+{
+  constructor (props)
+  {
+    super(props);
+    this.container = React.createRef();
+  }
+  componentDidUpdate()
+  {
+    const container = this.container.current;
+    // The rectangle enclosing the card in coordinates of the viewport.
+    var cardRect, containerRect, clonedCard;
+    if (this.props.card && !this.props.positiontomoveto)
+    {
+      if (container.hasChildNodes())
+      {
+        container.removeChild( container.childNodes[0] );
+      }
+      cardRect = this.props.card.getBoundingClientRect();
+      containerRect = container.getBoundingClientRect();
+      clonedCard = this.props.card.cloneNode(true);
+      container.appendChild( clonedCard );
+      clonedCard.classList.add("clipboardCard");
+      clonedCard.style.position = "fixed";
+      clonedCard.style.left = cardRect.left + "px"; // hebben we dit nodig?
+      clonedCard.style.top = cardRect.top + "px"; // hebben we dit nodig?
+      clonedCard.style.width = cardRect.width + "px";
+      clonedCard.style.height = cardRect.height + "px";
+      clonedCard.style.transition = "transform 1s";
+      setTimeout(function () {
+        clonedCard.style.transform = 'translateX(' + (containerRect.left - cardRect.left) + 'px)';
+        clonedCard.style.transform += 'translateY(' + (containerRect.top - cardRect.top) + 'px)';
+      }, 10);
+    }
+    if ( this.props.card && this.props.positiontomoveto )
+    {
+      // The current position of the card.
+      cardRect = this.props.card.getBoundingClientRect();
+      containerRect = container.getBoundingClientRect();
+      clonedCard = container.childNodes[0];
+      if ( parseInt( this.props.positiontomoveto.x ) == -1 )
+      {
+        clonedCard.style.transform = 'translateX(' + (containerRect.left - cardRect.left) + 'px)';
+        clonedCard.style.transform += 'translateY(' + (containerRect.top - cardRect.top) + 'px)';
+      }
+      else
+      {
+        clonedCard.style.transform = 'translateX(' + (parseInt( this.props.positiontomoveto.x ) - cardRect.left) + 'px)';
+        clonedCard.style.transform += 'translateY(' + (parseInt( this.props.positiontomoveto.y ) - cardRect.top) + 'px)';
+      }
+    }
+  }
+
+  render ()
+  {
+    if (this.props.card)
+    {
+      return <div ref={this.container} className="CardClipBoardShown" style={{zIndex: 1000}}></div>
+    }
+    else {
+      return <div className="CardClipBoardHidden"/>
+    }
+
+  }
+}
+
+CardClipBoard.propTypes =
+  { card: PropTypes.element
+  , positionToMoveTo: PropTypes.shape(
+    { x: PropTypes.string.isRequired // i.e. "40px". Set to "-1px" in order to move the card back to the clipboard.
+    , y: PropTypes.string.isRequired
+    })
+  }
+
 function Trash(props)
 {
-  return  <div onDragOver={ev => ev.preventDefault()}
-              onDrop={ev => {props.removeRol( JSON.parse( ev.dataTransfer.getData("PSRol") ) ); ev.target.classList.remove("border", "p-3", "border-primary")}}
-              onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
-              onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
-            <Octicon icon={Trashcan} size='medium'/>
-          </div>
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props} show={props.show.toString()}>
+      Drop a card here to remove it
+    </Tooltip> );
+  return  <OverlayTrigger
+                  placement="left"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderTooltip}
+                >
+                <div onDragOver={ev => ev.preventDefault()}
+                    tabIndex="0"
+                    onDrop={ev => {props.removerol( JSON.parse( ev.dataTransfer.getData("PSRol") ) ); ev.target.classList.remove("border", "p-3", "border-primary")}}
+                    onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
+                    onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
+                    <TrashcanIcon alt="Thrashcan" aria-label="Drop a card here to remove it" size='medium'/>
+                </div>
+          </OverlayTrigger>
 }
 
 function Download(props)
 {
-  return  <div onDragOver={ev => ev.preventDefault()}
-              onDrop={ev => {importContexts(ev.dataTransfer.files); ev.target.classList.remove("border", "p-3", "border-primary")}}
-              onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
-              onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
-            <Octicon icon={CloudDownload} size='medium'/>
-          </div>
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props} show={props.show.toString()}>
+      Drop an invitation file here
+    </Tooltip>);
+
+  return  <OverlayTrigger
+                  placement="left"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderTooltip}
+                >
+                <div onDragOver={ev => ev.preventDefault()}
+                    tabIndex="0"
+                    onDrop={ev => {importContexts(ev.dataTransfer.files); ev.target.classList.remove("border", "p-3", "border-primary")}}
+                    onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
+                    onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
+                  <DesktopDownloadIcon aria-label="Drop an invitation file here" size='medium'/>
+                </div>
+          </OverlayTrigger>
 }
 
 export default App;
