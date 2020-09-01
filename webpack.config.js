@@ -31,12 +31,10 @@ const rendererConfig = {
       filename: '[name].js',
       path: path.resolve(__dirname, 'public')
     },
-  externals: {},
+  externals: { react: "commonjs2 react"},
   watch: false,
   mode: "development",
   target: "electron-renderer",
-  plugins: [
-    ],
   module: {
     rules: [
       {
@@ -69,13 +67,6 @@ const rendererConfig = {
       }
     ]
   }
-  // }
-  // , devServer: {
-  //     publicPath: "/",
-  //     contentBase: path.join(__dirname, 'public'),
-  //     port: port,
-  //     watchContentBase: false
-  // }
 };
 
 module.exports = [rendererConfig]

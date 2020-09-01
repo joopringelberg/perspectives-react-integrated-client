@@ -37,7 +37,7 @@
   "dependencies": {
     "perspectives-core": "git+https://github.com/joopringelberg/perspectives-core.git#v0.6.0",
     "perspectives-proxy": "git+https://github.com/joopringelberg/perspectives-proxy.git#v1.4.0",
-    "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git#v0.6.0",
+    "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git#v0.6.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
     "react-dom": "^16.13.1",

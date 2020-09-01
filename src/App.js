@@ -7,7 +7,6 @@ const { shell, ipcRenderer } = require('electron');
 import "./externals.js";
 
 import {
-    Context,
     Rol,
     RoleInstances,
     PSRol,
@@ -473,7 +472,7 @@ class CardClipBoard extends React.PureComponent
 }
 
 CardClipBoard.propTypes =
-  { card: PropTypes.element
+  { card: PropTypes.object
   , positionToMoveTo: PropTypes.shape(
     { x: PropTypes.string.isRequired // i.e. "40px". Set to "-1px" in order to move the card back to the clipboard.
     , y: PropTypes.string.isRequired
