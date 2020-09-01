@@ -277,30 +277,21 @@ class AppSwitcher extends React.PureComponent
   render ()
   {
     return  <Container>
-              <Navbar bg="light" expand="lg" aria-label="Main menu bar">
-                <Navbar.Brand href="#home">InPlace</Navbar.Brand>
+              <Navbar bg="light" expand="lg" role="banner" aria-label="Main menu bar">
+                <Navbar.Brand tabIndex="-1" href="#home">InPlace</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Container>
-                    <Row>
-                      <Col/>
-                      <Col lg={1}>
-                        <Download/>
-                      </Col>
-                      <Col lg={1}>
-                        <RemoveRol>
-                          <Trash/>
-                        </RemoveRol>
-                      </Col>
-                    </Row>
-                    </Container>
+                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                  <Download/>
+                  <RemoveRol>
+                    <Trash/>
+                  </RemoveRol>
                 </Navbar.Collapse>
               </Navbar>
               <MySystem>
                 <AppListTabContainer rol="IndexedContexts">
                   <Row className="align-items-stretch">
                     <Col lg={3} className="App-border-right">
-                      <Nav variant="pills" className="flex-column" aria-label="Apps">
+                      <Nav variant="pills" className="flex-column" aria-label="Apps" aria-orientation="vertical">
                         <RoleInstanceIterator>
                           <View viewname="allProperties">
                             <PSView.Consumer>
@@ -482,7 +473,7 @@ CardClipBoard.propTypes =
 function Trash(props)
 {
   const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props} show={props.show.toString()}>
+    <Tooltip id="trash-tooltip" {...props} show={props.show.toString()}>
       Drop a card here to remove it
     </Tooltip> );
   return  <OverlayTrigger
@@ -491,6 +482,9 @@ function Trash(props)
                   overlay={renderTooltip}
                 >
                 <div onDragOver={ev => ev.preventDefault()}
+                    className="ml-3 mr-3"
+                    aria-dropeffect="execute"
+                    aria-describedby="trash-tooltip"
                     tabIndex="0"
                     onDrop={ev => {props.removerol( JSON.parse( ev.dataTransfer.getData("PSRol") ) ); ev.target.classList.remove("border", "p-3", "border-primary")}}
                     onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
@@ -503,7 +497,7 @@ function Trash(props)
 function Download(props)
 {
   const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props} show={props.show.toString()}>
+    <Tooltip id="download-tooltip" {...props} show={props.show.toString()}>
       Drop an invitation file here
     </Tooltip>);
 
@@ -513,6 +507,9 @@ function Download(props)
                   overlay={renderTooltip}
                 >
                 <div onDragOver={ev => ev.preventDefault()}
+                    className="ml-3 mr-3"
+                    aria-dropeffect="execute"
+                    aria-describedby="trash-tooltip"
                     tabIndex="0"
                     onDrop={ev => {importContexts(ev.dataTransfer.files); ev.target.classList.remove("border", "p-3", "border-primary")}}
                     onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
