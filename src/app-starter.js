@@ -10,9 +10,6 @@ const { couchdbHost, couchdbPort } = require("./couchdbconfig.js");
 const fs = require('fs').promises;
 var btoa = require('btoa');
 
-const invitationFilePath = path.join(app.getPath("downloads"), "invitation.json");
-// console.log("Path to invitation = " + invitationFilePath );
-
 // Module to control application life.
 // const app = electron.app;
 // Module to create native browser window.
@@ -101,22 +98,6 @@ function createWindow ()
     // when you should delete the corresponding element.
     mainWindow = null;
   });
-
-  // ipcMain.handle('createfile', async (event, text) => {
-  // 	return await fs.writeFile(invitationFilePath, text, {mode: 0o666, flag: "w"}).then( () => invitationFilePath);
-  // })
-  //
-  // ipcMain.on('ondragstart', (event, filePath) => {
-  //   event.sender.startDrag(
-  //     { file: filePath, icon: path.join(__dirname, "file.png") });
-  //   });
-
-  ipcMain.on('invitationpath', (event) => { event.returnValue = invitationFilePath});
-
-  ipcMain.on('ondragstart', (event, filePath) => {
-    event.sender.startDrag(
-      { file: filePath, icon: path.join(__dirname, "file.png")});
-    })
 
 }
 

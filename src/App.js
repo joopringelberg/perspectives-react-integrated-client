@@ -7,7 +7,6 @@ const { shell, ipcRenderer } = require('electron');
 import "./externals.js";
 
 import {
-    Rol,
     RoleInstances,
     PSRol,
     PSRoleInstances,
@@ -15,10 +14,9 @@ import {
     AppContext,
     RolBinding,
     View,
-    getModelName,
     Screen,
     RemoveRol,
-    importContexts,
+    importTransaction,
     MySystem,
     RoleInstanceIterator
   } from "perspectives-react";
@@ -138,6 +136,7 @@ class App extends Component
             component.setState( {usersConfigured: true } );
           }
         });
+    // End the session in Couchdb. Without this, the client would be automatically logged in - even if a user wanted to start a session with another account!
     ipcRenderer.on('quit', function(event, text)
       {
         fetch( component.state.host + ":" + component.state.port + "/_session", { method: 'delete' } )
@@ -511,7 +510,7 @@ function Download(props)
                     aria-dropeffect="execute"
                     aria-describedby="trash-tooltip"
                     tabIndex="0"
-                    onDrop={ev => {importContexts(ev.dataTransfer.files); ev.target.classList.remove("border", "p-3", "border-primary")}}
+                    onDrop={ev => {importTransaction(ev.dataTransfer.files); ev.target.classList.remove("border", "p-3", "border-primary")}}
                     onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
                     onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
                   <DesktopDownloadIcon aria-label="Drop an invitation file here" size='medium'/>
