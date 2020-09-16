@@ -276,17 +276,17 @@ class AppSwitcher extends React.PureComponent
   render ()
   {
     return  <Container>
-              <Navbar bg="light" expand="lg" role="banner" aria-label="Main menu bar">
-                <Navbar.Brand tabIndex="-1" href="#home">InPlace</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                  <Download/>
-                  <RemoveRol>
-                    <Trash/>
-                  </RemoveRol>
-                </Navbar.Collapse>
-              </Navbar>
               <MySystem>
+                <Navbar bg="light" expand="lg" role="banner" aria-label="Main menu bar">
+                  <Navbar.Brand tabIndex="-1" href="#home">InPlace</Navbar.Brand>
+                  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                  <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                    <Download/>
+                    <RemoveRol>
+                      <Trash/>
+                    </RemoveRol>
+                  </Navbar.Collapse>
+                </Navbar>
                 <AppListTabContainer rol="IndexedContexts">
                   <Row className="align-items-stretch">
                     <Col lg={3} className="App-border-right">
