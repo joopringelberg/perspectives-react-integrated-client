@@ -54,11 +54,11 @@ function createWindow ()
     {
       // size for movie on 1280x800 screen.
       width: 1280,
-      // height: 400,
+      height: 400,
 
       // For debugging auto-update (positioning window left from version window).
       // width: 600,
-      height: 600,
+      // height: 600,
       x: 10,
       y: 0,
       webPreferences: {
