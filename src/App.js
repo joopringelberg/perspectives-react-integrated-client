@@ -59,10 +59,20 @@ class App extends Component
       , resetAccount: false
       , couchdbInstalled: false
       , usersConfigured: false
+
+      // Card clipboard data:
       , selectedCard: undefined
       , selectedRole: undefined
+      , roltype: undefined
+      , contexttype: undefined
+
       , positionToMoveTo: undefined
-      , setSelectedCard: (c, roleId) => this.setState({selectedCard: c, selectedRole: roleId})
+      , setSelectedCard: (selectedCard, selectedRole, roltype, contexttype) => this.setState(
+          { selectedCard
+          , selectedRole
+          , roltype
+          , contexttype
+          })
       , setPositionToMoveTo: (pos) => this.setState({positionToMoveTo: pos})
       , setusername: function(usr)
         {
@@ -475,22 +485,51 @@ function Trash(props)
     <Tooltip id="trash-tooltip" {...props} show={props.show.toString()}>
       Drop a card here to remove it
     </Tooltip> );
-  return  <OverlayTrigger
-                  placement="left"
-                  delay={{ show: 250, hide: 400 }}
-                  overlay={renderTooltip}
-                >
-                <div onDragOver={ev => ev.preventDefault()}
-                    className="ml-3 mr-3"
-                    aria-dropeffect="execute"
-                    aria-describedby="trash-tooltip"
-                    tabIndex="0"
-                    onDrop={ev => {props.removerol( JSON.parse( ev.dataTransfer.getData("PSRol") ) ); ev.target.classList.remove("border", "p-3", "border-primary")}}
-                    onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
-                    onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
-                    <TrashcanIcon alt="Thrashcan" aria-label="Drop a card here to remove it" size='medium'/>
-                </div>
-          </OverlayTrigger>
+
+  const eventDiv = React.createRef();
+
+  function handleKeyDown ( event, rolinstance, roltype, contexttype, setSelectedCard, setPositionToMoveTo )
+  {
+    const eventDivRect = eventDiv.current.getBoundingClientRect()
+    switch(event.keyCode){
+      case 13: // Enter
+      case 32: // space
+        // Animate the movement of the card to the dropzone.
+        setPositionToMoveTo( {x: eventDivRect.x + "px", y: eventDivRect.y + "px"} );
+        // Remove the role.
+        props.removerol( {contexttype, roltype, rolinstance} );
+        // Wait for the animation to end.
+        setTimeout( function()
+          {
+            setSelectedCard();
+            setPositionToMoveTo();
+          },
+          900)
+        event.preventDefault();
+        break;
+      }
+  }
+  return  <AppContext.Consumer>{ ({selectedRole, roltype, contexttype, setSelectedCard, setPositionToMoveTo}) =>
+            <OverlayTrigger
+                    placement="left"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={renderTooltip}
+                  >
+                  <div
+                      ref={eventDiv}
+                      onDragOver={ev => ev.preventDefault()}
+                      className="ml-3 mr-3"
+                      aria-dropeffect="execute"
+                      aria-describedby="trash-tooltip"
+                      tabIndex="0"
+                      onDrop={ev => {props.removerol( JSON.parse( ev.dataTransfer.getData("PSRol") ) ); ev.target.classList.remove("border", "p-3", "border-primary")}}
+                      onKeyDown={ ev => handleKeyDown( ev, selectedRole, roltype, contexttype, setSelectedCard, setPositionToMoveTo )}
+                      onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
+                      onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
+                      <TrashcanIcon alt="Thrashcan" aria-label="Drop a card here to remove it" size='medium'/>
+                  </div>
+            </OverlayTrigger>}
+          </AppContext.Consumer>
 }
 
 function Download(props)
