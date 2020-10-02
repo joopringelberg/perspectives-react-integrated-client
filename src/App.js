@@ -536,8 +536,28 @@ function Download(props)
 {
   const renderTooltip = (props) => (
     <Tooltip id="download-tooltip" {...props} show={props.show.toString()}>
-      Drop an invitation file here
+      Drop an invitation file here or press enter/space
     </Tooltip>);
+
+  function handleKeyDown(event)
+  {
+    switch(event.keyCode){
+      case 13: // Enter
+      case 32: // space
+        document.getElementById('selectedFile').click();
+        event.preventDefault();
+        break;
+      }
+  }
+
+  function handleFileSelect(event)
+  {
+    const fileList = event.target.files;
+    if (fileList.length > 0)
+    {
+      importTransaction(fileList);
+    }
+  }
 
   return  <OverlayTrigger
                   placement="left"
@@ -551,10 +571,14 @@ function Download(props)
                     tabIndex="0"
                     onDrop={ev => {importTransaction(ev.dataTransfer.files); ev.target.classList.remove("border", "p-3", "border-primary")}}
                     onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
-                    onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}>
+                    onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}
+                    onKeyDown={ev => handleKeyDown(ev)}
+                    >
+                  <input type="file" id="selectedFile" style={{display: "none"}} onChange={ev => handleFileSelect(ev)}/>
                   <DesktopDownloadIcon aria-label="Drop an invitation file here" size='medium'/>
                 </div>
           </OverlayTrigger>
 }
+
 
 export default App;
