@@ -1,4 +1,4 @@
-import React, { Component } from "react";// 26
+import React, { Component } from "react";// 27
 import "./App.css";
 import { authenticate, resetAccount } from 'perspectives-core';
 
@@ -18,7 +18,8 @@ import {
     RemoveRol,
     importTransaction,
     MySystem,
-    RoleInstanceIterator
+    RoleInstanceIterator,
+    FileDropZone
   } from "perspectives-react";
 
 import Container from 'react-bootstrap/Container';
@@ -291,7 +292,9 @@ class AppSwitcher extends React.PureComponent
                   <Navbar.Brand tabIndex="-1" href="#home">InPlace</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                    <Download/>
+                    <FileDropZone tooltiptext="Drop an invitation file here or press enter/space" handlefile={ importTransaction } extension=".json">
+                      <DesktopDownloadIcon aria-label="Drop an invitation file here" size='medium'/>
+                    </FileDropZone>
                     <RemoveRol>
                       <Trash/>
                     </RemoveRol>
@@ -531,54 +534,5 @@ function Trash(props)
             </OverlayTrigger>}
           </AppContext.Consumer>
 }
-
-function Download(props)
-{
-  const renderTooltip = (props) => (
-    <Tooltip id="download-tooltip" {...props} show={props.show.toString()}>
-      Drop an invitation file here or press enter/space
-    </Tooltip>);
-
-  function handleKeyDown(event)
-  {
-    switch(event.keyCode){
-      case 13: // Enter
-      case 32: // space
-        document.getElementById('selectedFile').click();
-        event.preventDefault();
-        break;
-      }
-  }
-
-  function handleFileSelect(event)
-  {
-    const fileList = event.target.files;
-    if (fileList.length > 0)
-    {
-      importTransaction(fileList);
-    }
-  }
-
-  return  <OverlayTrigger
-                  placement="left"
-                  delay={{ show: 250, hide: 400 }}
-                  overlay={renderTooltip}
-                >
-                <div onDragOver={ev => ev.preventDefault()}
-                    className="ml-3 mr-3"
-                    aria-dropeffect="execute"
-                    aria-describedby="trash-tooltip"
-                    tabIndex="0"
-                    onDrop={ev => {importTransaction(ev.dataTransfer.files); ev.target.classList.remove("border", "p-3", "border-primary")}}
-                    onDragEnter={ev => ev.target.classList.add("border", "border-primary") }
-                    onDragLeave={ev => ev.target.classList.remove("border", "border-primary")}
-                    onKeyDown={ev => handleKeyDown(ev)}
-                    >
-                  <input type="file" id="selectedFile" style={{display: "none"}} onChange={ev => handleFileSelect(ev)}/>
-                  <DesktopDownloadIcon aria-label="Drop an invitation file here" size='medium'/>
-                </div>
-          </OverlayTrigger>
-}
-
 
 export default App;
