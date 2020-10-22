@@ -292,7 +292,11 @@ class AppSwitcher extends React.PureComponent
                   <Navbar.Brand tabIndex="-1" href="#home">InPlace</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                    <FileDropZone tooltiptext="Drop an invitation file here or press enter/space" handlefile={ importTransaction } extension=".json">
+                    <FileDropZone
+                      tooltiptext="Drop an invitation file here or press enter/space"
+                      handlefile={ importTransaction }
+                      extension=".json"
+                      className="ml-3 mr-3">
                       <DesktopDownloadIcon aria-label="Drop an invitation file here" size='medium'/>
                     </FileDropZone>
                     <RemoveRol>
