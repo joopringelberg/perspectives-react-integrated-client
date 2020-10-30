@@ -247,9 +247,9 @@ class App extends Component
     }
     else {
       return (<Card>
-          <Card.Header as="h5">Couchdb installation required</Card.Header>
+          <Card.Header as="h5" role="heading" aria-level="1">Couchdb installation required</Card.Header>
           <Card.Body>
-            <Card.Title>No Couchdb detected</Card.Title>
+            <Card.Title role="heading" aria-level="2">No Couchdb detected</Card.Title>
             <Card.Text>
               InPlace cannot detect a Couchdb instance on your computer. This may have the following reasons:
             </Card.Text>
@@ -258,7 +258,7 @@ class App extends Component
               <li>Couchdb was installed, but is not running. Start Couchdb on your computer, then restart InPlace.</li>
               <li>Couchdb is running, but not on the default port 5984. Currently it is not possible to configure the port Perspectives uses to access Couchdb. Try to make Couchdb listen on port 5984.</li>
             </ol>
-            <Card.Title>How to install Coudchb</Card.Title>
+            <Card.Title role="heading" aria-level="2">How to install Coudchb</Card.Title>
             <Card.Text>Just download, install, start and verify Couchdb. You need not follow instructions in the Couchdb documents. Just perform the steps below.</Card.Text>
             <ol variant="flush">
               <li>Download Couchb version 3.1.0 from <a href="" onClick={function() {shell.openExternal('https://couchdb.apache.org/#download')}}>Couchdb</a>.</li>
@@ -288,10 +288,9 @@ class AppSwitcher extends React.PureComponent
   {
     return  <Container>
               <MySystem>
-                <Navbar bg="light" expand="lg" role="banner" aria-label="Main menu bar">
+                <Navbar bg="light" expand="lg" role="banner" aria-label="Main menu bar" className="justify-content-between">
                   <Navbar.Brand tabIndex="-1" href="#home">InPlace</Navbar.Brand>
-                  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                  <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                  <Nav>
                     <FileDropZone
                       tooltiptext="Drop an invitation file here or press enter/space"
                       handlefile={ importTransaction }
@@ -302,7 +301,7 @@ class AppSwitcher extends React.PureComponent
                     <RemoveRol>
                       <Trash/>
                     </RemoveRol>
-                  </Navbar.Collapse>
+                  </Nav>
                 </Navbar>
                 <AppListTabContainer rol="IndexedContexts">
                   <Row className="align-items-stretch">
