@@ -38,15 +38,17 @@
     "perspectives-core": "git+https://github.com/joopringelberg/perspectives-core.git#v0.7.1",
     "perspectives-proxy": "git+https://github.com/joopringelberg/perspectives-proxy.git#v1.5.0",
     "perspectives-react": "https://github.com/joopringelberg/perspectives-react.git#v0.7.1",
-    "react": "^16.13.1",
-    "react-bootstrap": "^1.3.0",
-    "react-dom": "^16.13.1",
-    "@primer/octicons-react": "^10.0.0",
+    "react": "^17.0.1",
+    "react-bootstrap": "^1.4.0",
+    "react-dom": "^17.0.1",
+    "@primer/octicons-react": "^11.0.0",
     "bootstrap": "^4.3.1",
     "yargs": "^15.3.1",
     "btoa": "^1.2.1",
     "electron-log": "^4.2.2",
-    "electron-updater": "^4.3.1"
+    "electron-updater": "^4.3.1",
+    "@babel/polyfill": "^7.12.1",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

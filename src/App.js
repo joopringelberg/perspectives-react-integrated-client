@@ -1,6 +1,7 @@
 import React, { Component } from "react";// 27
 import "./App.css";
 import { authenticate, resetAccount } from 'perspectives-core';
+import PropTypes from "prop-types";
 
 const { shell, ipcRenderer } = require('electron');
 
@@ -31,16 +32,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Badge from 'react-bootstrap/Badge';
 import InputGroup from 'react-bootstrap/InputGroup';
-import ListGroup from 'react-bootstrap/ListGroup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-import {TrashcanIcon, DesktopDownloadIcon} from '@primer/octicons-react'
+import {TrashcanIcon, DesktopDownloadIcon} from '@primer/octicons-react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Maybe we do this to force a rebuild when the proxy changes.
 const Perspectives = require("perspectives-proxy").Perspectives;
 
 class App extends Component
@@ -92,7 +92,7 @@ class App extends Component
               {
                 if (!success)
                 {
-                  alert("Unfortunately your account could not be reset and may be in an undefined state. You can reset by hand by opening Fauxton and removing all three databases whose name starts with your username.")
+                  alert("Unfortunately your account could not be reset and may be in an undefined state. You can reset by hand by opening Fauxton and removing all three databases whose name starts with your username.");
                 }
                 window.location.reload();
               })();
@@ -108,18 +108,18 @@ class App extends Component
                   switch (n) {
                     // UnknownUser
                     case 0:
-                      component.setState({authenticationFeedback: "This combination of username and password is unknown."})
+                      component.setState({authenticationFeedback: "This combination of username and password is unknown."});
                       break;
                     // WrongPassword
                     case 1:
-                      component.setState({authenticationFeedback: "Detected a valid Couchdb System Admin who is not yet an InPlace user. However, an error occurred on creating a new InPlace account!"})
+                      component.setState({authenticationFeedback: "Detected a valid Couchdb System Admin who is not yet an InPlace user. However, an error occurred on creating a new InPlace account!"});
                       break;
                     // OK
                     case 2:
-                      component.setState({notLoggedIn: false})
+                      component.setState({notLoggedIn: false});
                       break;
                 }
-              }
+              };
               })();
           }
          }
@@ -148,7 +148,7 @@ class App extends Component
           }
         });
     // End the session in Couchdb. Without this, the client would be automatically logged in - even if a user wanted to start a session with another account!
-    ipcRenderer.on('quit', function(event, text)
+    ipcRenderer.on('quit', function(/*event, text*/)
       {
         fetch( component.state.host + ":" + component.state.port + "/_session", { method: 'delete' } )
           .then(function(response) {
@@ -209,7 +209,7 @@ class App extends Component
                       <Form.Control type="password" placeholder="Password" aria-label="Password" onBlur={e => component.state.setpassword(e.target.value)}/>
                     </Col>
                   </Form.Group>
-                  <Button variant="primary" onClick={e => component.state.authenticate()}>Login</Button>
+                  <Button variant="primary" onClick={() => component.state.authenticate()}>Login</Button>
                   <Form.Group>
                     <Col sm="6">
                       <Form.Label>Check to reset account (removes all data!):</Form.Label>
@@ -261,9 +261,9 @@ class App extends Component
             <Card.Title role="heading" aria-level="2">How to install Coudchb</Card.Title>
             <Card.Text>Just download, install, start and verify Couchdb. You need not follow instructions in the Couchdb documents. Just perform the steps below.</Card.Text>
             <ol variant="flush">
-              <li>Download Couchb version 3.1.0 from <a href="" onClick={function() {shell.openExternal('https://couchdb.apache.org/#download')}}>Couchdb</a>.</li>
-              <li>Run Couchdb. An small dialog will appear stating: "Nou CouchDB Admin password found". Enter a password and remember it well!</li>
-              <li>This will open up a page in your webbrowser: this is the Fauxton admin interface. If this does not happen, click <a href="" onClick={function() {shell.openExternal('http://127.0.0.1:5984/_utils')}}>here</a>.</li>
+              <li>Download Couchb version 3.1.0 from <a href="" onClick={function() {shell.openExternal('https://couchdb.apache.org/#download');}}>Couchdb</a>.</li>
+              <li>Run Couchdb. An small dialog will appear stating: "No CouchDB Admin password found". Enter a password and remember it well!</li>
+              <li>This will open up a page in your webbrowser: this is the Fauxton admin interface. If this does not happen, click <a href="" onClick={function() {shell.openExternal('http://127.0.0.1:5984/_utils');}}>here</a>.</li>
               <li>Enter "admin" for username and the password you've just set.</li>
               <li>Verify the install by clicking on the Verify button in the left column (the button with the checkmark), then click the button "Verify Installation".</li>
               <li>Create a new System Admin.
@@ -276,7 +276,7 @@ class App extends Component
               <li>Close InPlace (this application) and start it again. Then enter the username and password you've just added to Couchdb.</li>
             </ol>
           </Card.Body>
-        </Card>)
+        </Card>);
     }
   }
 }
@@ -336,7 +336,7 @@ class AppSwitcher extends React.PureComponent
                   </Row>
                 </AppListTabContainer>
               </MySystem>
-            </Container>
+            </Container>;
 
   }
 }
@@ -347,7 +347,7 @@ function Welcome(){
           <Card.Body>
             <Card.Text>There is no user of this InPlace installation yet. Enter the username and password you've used to create a Server Admin in Couchdb. If you have not done that yet, follow these instructions:</Card.Text>
             <ol>
-              <li>Go to the <a href="" onClick={function() {shell.openExternal('http://127.0.0.1:5984/_utils')}}>Fauxton admin interface</a>.</li>
+              <li>Go to the <a href="" onClick={function() {shell.openExternal('http://127.0.0.1:5984/_utils');}}>Fauxton admin interface</a>.</li>
               <li>Enter "admin" for username and the password you've set on installing Couchdb.</li>
               <li>Click the lowest button in the left column, select the "Create Server Admin" tab. </li>
               <li>Enter the name you will use to open InPlace. Enter a password.</li>
@@ -355,7 +355,7 @@ function Welcome(){
               <li>Finally close InPlace (this program) and open it again.</li>
             </ol>
           </Card.Body>
-        </Card>
+        </Card>;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -367,7 +367,7 @@ function AppListTabContainer (props)
   {
     constructor(props)
     {
-      super(props)
+      super(props);
       this.state={};
     }
     componentDidMount()
@@ -392,7 +392,7 @@ function AppListTabContainer (props)
       {
         return  <Tab.Container id="apps" mountOnEnter={true} unmountOnExit={true} defaultActiveKey={this.state.firstApp}>
                   {this.props.children}
-                </Tab.Container>
+                </Tab.Container>;
       }
       else {
         return <div/>
@@ -403,7 +403,7 @@ function AppListTabContainer (props)
 
   return (<RoleInstances rol={props.rol}>
       <AppListTabContainer_>{ props.children }</AppListTabContainer_>
-    </RoleInstances>)
+    </RoleInstances>);
 }
 
 AppListTabContainer.propTypes = { "rol": PropTypes.string.isRequired };

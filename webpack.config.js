@@ -3,25 +3,25 @@ const path = require("path");
 // The default port is 5678. Configure a port by providing the environment variable WEBPACK_DEVSERVER_PORT with a value.
 // const port = process.env.WEBPACK_DEVSERVER_PORT || 5678;
 
-const mainConfig = {
-  entry:
-    { "app-starter": path.join(__dirname, "src/app-starter.js")
-  },
-  output: {
-      filename: '[name].js',
-      path: path.resolve(__dirname, 'public')
-    },
-  externals: {},
-  watch: false,
-  mode: "development",
-  target: "electron-main",
-  plugins: [
-    ],
-  module: {
-    rules: [
-    ]
-  }
-};
+// const mainConfig = {
+//   entry:
+//     { "app-starter": path.join(__dirname, "src/app-starter.js")
+//   },
+//   output: {
+//       filename: '[name].js',
+//       path: path.resolve(__dirname, 'public')
+//     },
+//   externals: {},
+//   watch: false,
+//   mode: "development",
+//   target: "electron-main",
+//   plugins: [
+//     ],
+//   module: {
+//     rules: [
+//     ]
+//   }
+// };
 
 const rendererConfig = {
   entry:
@@ -69,4 +69,4 @@ const rendererConfig = {
   }
 };
 
-module.exports = [rendererConfig]
+module.exports = [rendererConfig];
