@@ -495,7 +495,7 @@ function Trash(props)
 
   function handleKeyDown ( event, rolinstance, roltype, contexttype, setSelectedCard, setPositionToMoveTo )
   {
-    const eventDivRect = eventDiv.current.getBoundingClientRect()
+    const eventDivRect = eventDiv.current.getBoundingClientRect();
     switch(event.keyCode){
       case 13: // Enter
       case 32: // space
@@ -509,7 +509,7 @@ function Trash(props)
             setSelectedCard();
             setPositionToMoveTo();
           },
-          900)
+          900);
         event.preventDefault();
         break;
       }
@@ -534,7 +534,7 @@ function Trash(props)
                       <TrashcanIcon alt="Thrashcan" aria-label="Drop a card here to remove it" size='medium'/>
                   </div>
             </OverlayTrigger>}
-          </AppContext.Consumer>
+          </AppContext.Consumer>;
 }
 
 function ConnectedToAMQP()
