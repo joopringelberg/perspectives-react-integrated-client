@@ -13,14 +13,14 @@ import {
     PSRoleInstances,
     PSView,
     AppContext,
-    RolBinding,
     View,
     Screen,
     RemoveRol,
     importTransaction,
     MySystem,
     RoleInstanceIterator,
-    FileDropZone
+    FileDropZone,
+    ViewOnExternalRole
   } from "perspectives-react";
 
 import Container from 'react-bootstrap/Container';
@@ -36,7 +36,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-import {TrashcanIcon, DesktopDownloadIcon} from '@primer/octicons-react';
+import {TrashcanIcon, DesktopDownloadIcon, BroadcastIcon} from '@primer/octicons-react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -301,6 +301,7 @@ class AppSwitcher extends React.PureComponent
                     <RemoveRol>
                       <Trash/>
                     </RemoveRol>
+                    <ConnectedToAMQP/>
                   </Nav>
                 </Navbar>
                 <AppListTabContainer rol="IndexedContexts">
@@ -323,11 +324,9 @@ class AppSwitcher extends React.PureComponent
                         <RoleInstanceIterator>
                           <PSRol.Consumer>{ roleinstance =>
                             <Tab.Pane eventKey={roleinstance.rolinstance}>
-                              <RolBinding>
-                                <PSRol.Consumer>
-                                  { binding => <Screen rolinstance={binding.rolinstance}/> }
-                                </PSRol.Consumer>
-                              </RolBinding>
+                              <PSRol.Consumer>
+                                { psrol => <Screen rolinstance={psrol.rolinstance}/> }
+                              </PSRol.Consumer>
                             </Tab.Pane>}
                           </PSRol.Consumer>
                         </RoleInstanceIterator>
@@ -395,7 +394,7 @@ function AppListTabContainer (props)
                 </Tab.Container>;
       }
       else {
-        return <div/>
+        return <div/>;
       }
     }
   }
@@ -536,6 +535,17 @@ function Trash(props)
                   </div>
             </OverlayTrigger>}
           </AppContext.Consumer>
+}
+
+function ConnectedToAMQP()
+{
+  return  <ViewOnExternalRole viewname="allProperties">
+            <PSView.Consumer>
+            {
+              roleinstance => roleinstance.propval("ConnectedToAMQPBroker")[0] == "true" ? <BroadcastIcon alt="Connected" aria-label="InPlace can send and receive messages" size='medium'/> : <div/>
+            }
+            </PSView.Consumer>
+          </ViewOnExternalRole>;
 }
 
 export default App;
